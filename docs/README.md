@@ -57,3 +57,40 @@ Le projet devra être déployé et accessible en ligne à la fin de la période 
 • Configurer la base de données PostgreSQL sur Supabase (plan gratuit)
 • Vérifier que l'application fonctionne correctement en production (tests de bout en bout)
 • Fournir l'URL de l'application déployée à votre tutrice
+
+
+
+
+Description du projet : 
+
+Créer un site web dynamique en JS pour une pizzaria 
+Description de l'entreprise : les cuisiners font des pizzas, l'enregistre dans les stocks, les clients peuvent commander les pizzas dispo en stock, possiblités après de venir les chercher/livraison
+Objectif : mettre en relation les cuisines, clients, commandes, et livreurs afin de faciliter la gestion/communication
+
+- Création de comptes (user, admin, livreur)
+
+Côté user : 
+    - Info personnelles requises
+    - Validation/vérif par mail
+    - Mdp --> 8 - 16 char + 1 chiffres mini
+    - Connexion/déconnexion
+    - Changements d'infos (persos et mdp)
+    - Commander --> 
+        - Choisir ses produits
+        - Système de payement (utiliser Stripe)
+        - facturation, gén de pdf --> Voir + télécharger pdf
+        - Si possible --> Service de communication avec Admins
+    - 
+
+Côté Admin : 
+    - Gestion des users
+    - Gestion des stocks
+    - Vu sur les commandes et factures
+    - Vu et Gestion sur les livreurs
+    - 
+
+Côté livreur : 
+    - Same as User
+    - Vu et choix sur les commandes
+    - Voir adresse de livraison + nom clients
+    - 

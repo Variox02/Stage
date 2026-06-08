@@ -1,0 +1,99 @@
+:root {
+    --rouge:      #C8352A;
+    --rouge-dark: #8B1A12;
+    --orange:     #E07030;
+    --beige:      #F5EDD8;
+    --beige-dark: #EAD9BB;
+    --brun:       #7A4A2C;
+    --brun-light: #B07850;
+    --creme:      #FBF6EC;
+    --texte:      #2E1A0E;
+    --texte-muted:#8C6B50;
+}
+
+body { font-family: 'DM Sans', sans-serif; background: var(--creme); color: var(--texte); overflow-x: hidden; }
+h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+.btn-rouge       { background: var(--rouge); color: #fff; border: none; border-radius: 2rem; font-weight: 500; }
+.btn-rouge:hover { background: var(--rouge-dark); color: #fff; }
+.btn-brun        { background: transparent; color: var(--brun); border: 1.5px solid var(--brun-light); border-radius: 2rem; font-weight: 500; }
+.btn-brun:hover  { border-color: var(--brun); color: var(--brun); }
+.btn-white       { background: #fff; color: var(--rouge-dark); border: none; border-radius: 2rem; font-weight: 700; }
+.btn-white:hover { color: var(--rouge-dark); box-shadow: 0 6px 20px rgba(0,0,0,.2); transform: translateY(-2px); }
+
+
+#navbar { background: rgba(251,246,236,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--beige-dark); }
+.navbar-brand { font-family: 'Playfair Display', serif; color: var(--rouge) !important; font-size: 1.4rem; }
+.navbar-brand small { font-family: 'DM Sans', sans-serif; color: var(--brun); font-weight: 300; font-size: .75rem; font-style: normal; }
+.nav-link { color: var(--texte-muted) !important; font-size: .9rem; }
+.nav-link:hover { color: var(--rouge) !important; }
+
+
+#cart-badge {
+    position: absolute; top: -6px; right: -8px;
+    width: 20px; height: 20px;
+    background: var(--rouge); color: #fff;
+    font-size: .65rem; font-weight: 700;
+    border-radius: 50%;
+    display: none;
+    align-items: center; justify-content: center;
+}
+
+
+#hero { background: var(--beige); min-height: 100vh; }
+.hero-eyebrow { background: var(--rouge); color: #fff; font-size: .75rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; border-radius: 2rem; }
+.hero-badge-dot { width: 8px; height: 8px; background: #4caf50; border-radius: 50%; animation: pulse 2s infinite; display: inline-block; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+
+.pizza-circle { width: clamp(260px,36vw,460px); height: clamp(260px,36vw,460px); border-radius: 50%; background: var(--orange); position: relative; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 60px rgba(200,53,42,.18); }
+.pizza-circle::before { content:''; position:absolute; inset:8%; border-radius:50%; background:#D45A28; }
+.pizza-inner  { position:absolute; inset:14%; border-radius:50%; background:#C04A1A; display:flex; align-items:center; justify-content:center; }
+.pizza-emoji  { font-size: clamp(5rem,10vw,9rem); animation: float 4s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.pizza-tag    { position:absolute; background:var(--beige); border-radius:1rem; font-size:.8rem; font-weight:500; box-shadow:0 2px 12px rgba(0,0,0,.08); white-space:nowrap; }
+.pizza-tag-1  { top:10%; right:-10%; }
+.pizza-tag-2  { bottom:20%; left:-12%; }
+.pizza-tag-3  { bottom:5%; right:0; }
+
+
+#band { background: var(--rouge); overflow: hidden; }
+.band-track { display:flex; gap:3rem; animation: scroll-band 18s linear infinite; white-space:nowrap;  width: max-content; will-change: transform; }
+.band-item { font-size:.82rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.9); }
+.band-item::before {content: " . ";color: rgba(255,255,255,.6);}
+.band-item::after {content: " . ";color: rgba(255,255,255,.6);}
+@keyframes scroll-band { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+
+.eyebrow { font-size:.75rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--rouge); }
+
+
+.pizza-card { border: 1px solid var(--beige-dark) !important; border-radius: 1.25rem !important; transition: transform .2s, box-shadow .2s; }
+.pizza-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(200,53,42,.12) !important; }
+.pizza-card-img { height:180px; display:flex; align-items:center; justify-content:center; font-size:4.5rem; border-radius: 1.25rem 1.25rem 0 0; position:relative; }
+.badge-card { position:absolute; top:12px; right:12px; background:var(--rouge); font-size:.7rem; border-radius:1rem; }
+.pizza-name  { font-family:'Playfair Display',serif; font-size:1.1rem; }
+.pizza-ingr  { font-size:.82rem; color:var(--texte-muted); font-weight:300; }
+.pizza-price { font-size:1.2rem; font-weight:700; color:var(--rouge); }
+.btn-add { width:36px; height:36px; border-radius:50%; background:var(--beige); border:none; color:var(--rouge); font-size:1.3rem; display:flex; align-items:center; justify-content:center; transition:background .2s; cursor:pointer; }
+.btn-add:hover:not([disabled]) { background:var(--rouge); color:#fff; }
+.btn-add[disabled] { opacity:.4; cursor:not-allowed; }
+
+
+#how { background: var(--beige); }
+.step-icon { width:72px; height:72px; border-radius:50%; background:#fff; border:2px solid var(--beige-dark); display:flex; align-items:center; justify-content:center; font-size:2rem; position:relative; margin:0 auto; }
+.step-num  { position:absolute; top:-6px; right:-6px; width:24px; height:24px; background:var(--rouge); color:#fff; font-size:.7rem; font-weight:700; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+
+
+#cta { background: var(--rouge-dark); overflow:hidden; position:relative; }
+#cta::before { content:'🍕'; position:absolute; font-size:12rem; opacity:.05; top:-2rem; left:-2rem; transform:rotate(-20deg); }
+#cta::after  { content:'🍕'; position:absolute; font-size:10rem; opacity:.05; bottom:-1rem; right:2rem; transform:rotate(15deg); }
+
+
+footer { background: var(--texte); }
+.footer-link { color:rgba(245,237,216,.6); text-decoration:none; display:block; font-size:.85rem; line-height:1.9; font-weight:300; }
+.footer-link:hover { color:var(--beige); }
+
+
+.spinner-fournaise { border: 3px solid var(--beige-dark); border-top-color: var(--rouge); border-radius: 50%; width: 48px; height: 48px; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
