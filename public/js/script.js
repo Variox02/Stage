@@ -1,3 +1,5 @@
+// Page index.html
+
 function getEmojiForPizza(name) {
   const n = name.toLowerCase()
 
@@ -45,3 +47,4 @@ async function loadProducts() {
   }
 }
 loadProducts()
+

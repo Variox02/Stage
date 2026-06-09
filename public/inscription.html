@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription — Fournaise</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.leapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/auth.css" rel="stylesheet" />
+</head>
+<body class="auth-body">
+
+
+  <nav id="navbar" class="navbar navbar-expand-lg fixed-top py-0" style="height:64px;">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        Fournaise <small>Pizzeria artisanale</small>
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-center gap-3">
+          <li class="nav-item"><a class="nav-link" href="index.html#menu">Notre menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#how">Comment ça marche</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">À propos</a></li>
+          <li class="nav-item">
+            <a class="btn btn-rouge px-3 py-2 position-relative" href="#" id="cart-btn" title="Mon panier">
+              🛒 Panier
+              <span id="cart-badge">0</span>
+            </a>
+          </li>
+          <li class="nav-item"><a class="btn btn-brun px-4 py-2" href="connexion.html">Connexion</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <main class="auth-main" style="padding-top:64px;">
+    <div class="auth-container">
+      <div class="auth-card">
+
+
+        <div class="auth-logo">
+          <a href="index.html" class="auth-logo-name">Fournaise</a>
+          <span class="auth-logo-sub">Pizzeria artisanale depuis 2010</span>
+        </div>
+
+
+        <div class="promo-badge">
+          🎉 <strong>10 % de réduction</strong> sur votre première commande en créant votre compte gratuitement
+        </div>
+
+        <h1 class="auth-title">Créer un compte</h1>
+        <p class="auth-subtitle">Rejoignez la communauté Fournaise</p>
+
+
+        <form id="form-inscription" novalidate>
+
+          <div id="auth-alert" class="auth-alert d-none" role="alert"></div>
+
+          <div class="row g-2 mb-0">
+            <div class="col-6">
+              <div class="field-group">
+                <label class="field-label" for="prenom">Prénom</label>
+                <input class="field-input" type="text" id="prenom" name="prenom" placeholder="Marie" autocomplete="given-name" required />
+                <div class="field-error" id="prenom-error"></div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="field-group">
+                <label class="field-label" for="nom">Nom</label>
+                <input class="field-input" type="text" id="nom" name="nom" placeholder="Dupont" autocomplete="family-name" required />
+                <div class="field-error" id="nom-error"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="email">Adresse e-mail</label>
+            <input class="field-input" type="email" id="email" name="email" placeholder="vous@exemple.fr" autocomplete="email" required />
+            <div class="field-error" id="email-error"></div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="password">Mot de passe</label>
+            <div class="pass-wrap">
+              <input class="field-input" type="password" id="password" name="password" placeholder="Min. 8 caractères" autocomplete="new-password" required />
+              <button type="button" class="pass-toggle" id="toggle-password" aria-label="Afficher le mot de passe">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <div class="strength-bar" id="strength-bar" aria-hidden="true">
+              <div class="strength-seg" id="seg-1"></div>
+              <div class="strength-seg" id="seg-2"></div>
+              <div class="strength-seg" id="seg-3"></div>
+              <div class="strength-seg" id="seg-4"></div>
+            </div>
+            <div class="field-hint" id="strength-hint"></div>
+            <div class="field-error" id="password-error"></div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="password-confirm">Confirmer le mot de passe</label>
+            <div class="pass-wrap">
+              <input class="field-input" type="password" id="password-confirm" name="password-confirm" placeholder="••••••••" autocomplete="new-password" required />
+              <button type="button" class="pass-toggle" id="toggle-password-confirm" aria-label="Afficher la confirmation">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <div class="field-error" id="confirm-error"></div>
+          </div>
+
+          <div class="check-row">
+            <input type="checkbox" class="check-input" id="cgu" name="cgu" required />
+            <label class="check-label" for="cgu">
+              J'accepte les <a href="#">conditions générales d'utilisation</a> et la <a href="#">politique de confidentialité</a>
+            </label>
+          </div>
+          <div class="field-error mb-2" id="cgu-error"></div>
+
+          <div class="check-row">
+            <input type="checkbox" class="check-input" id="newsletter" name="newsletter" />
+            <label class="check-label" for="newsletter">
+              Je souhaite recevoir les offres et nouveautés par e-mail
+            </label>
+          </div>
+
+          <button type="submit" class="btn-auth btn-rouge-auth mt-3" id="btn-submit">
+            <span id="btn-text">Créer mon compte</span>
+            <span id="btn-spinner" class="spinner-border spinner-border-sm d-none ms-2" role="status" aria-hidden="true"></span>
+          </button>
+
+        </form>
+
+        <div class="auth-divider">
+          <span class="auth-divider-line"></span>
+          <span class="auth-divider-text">ou</span>
+          <span class="auth-divider-line"></span>
+        </div>
+
+        <p class="auth-switch-link">
+          Déjà un compte ? <a href="connexion.html">Se connecter</a>
+        </p>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h4 class="mb-2" style="color:var(--rouge); font-size:1.5rem;">Fournaise</h4>
+          <p class="fw-light small" style="color:rgba(245,237,216,.6); line-height:1.8;">Pizzeria artisanale depuis 2010. Des pizzas préparées avec passion, cuites au feu de bois, livrées à votre porte.</p>
+        </div>
+        <div class="col-md-2">
+          <h6 class="mb-3" style="color:var(--beige);">Menu</h6>
+          <a class="footer-link" href="#">Nos pizzas</a>
+          <a class="footer-link" href="#">Boissons</a>
+          <a class="footer-link" href="#">Desserts</a>
+          <a class="footer-link" href="#">Formules</a>
+        </div>
+        <div class="col-md-2">
+          <h6 class="mb-3" style="color:var(--beige);">Compte</h6>
+          <a class="footer-link" href="connexion.html">Connexion</a>
+          <a class="footer-link" href="inscription.html">Inscription</a>
+          <a class="footer-link" href="#">Mes commandes</a>
+          <a class="footer-link" href="#">Mon profil</a>
+        </div>
+        <div class="col-md-4">
+          <h6 class="mb-3" style="color:var(--beige);">Contact</h6>
+          <p class="footer-link mb-1">📍 10 Rue des Automnes, 99099 Mars</p>
+          <p class="footer-link mb-1">📞 00 00 00 00 00</p>
+          <p class="footer-link">⏰ Mar–Dim · 11h30 – 22h30</p>
+        </div>
+      </div>
+      <div class="border-top mt-4 pt-3 text-center" style="border-color:rgba(245,237,216,.1) !important; color:rgba(245,237,216,.35); font-size:.78rem;">
+        © 2025 Fournaise — Tous droits réservés ·
+        <a href="#" style="color:inherit;">Mentions légales</a> ·
+        <a href="#" style="color:inherit;">CGU</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
