@@ -1,4 +1,4 @@
-// Page inscription.html et connexion.html
+// Page inscription.html
 function showError(fieldId, message) {
     const field = document.getElementById(fieldId)
     const error = document.getElementById(`${fieldId}-error`)
@@ -29,6 +29,7 @@ function showAlert(message, type = 'error') {
     alert.classList.remove('d-none')
 }
 
+//Affichage force password
 function getStrength(value){
     let score = 0
     if (value.length >=8) score++
@@ -52,14 +53,18 @@ const strengthClasses = [
     'strong',
     'strong',
 ]
+//Affichage de la force du password
 document.getElementById('password').addEventListener('input', (e) => {
     const value = e.target.value
     const score = getStrength(value)
     const segs = [1, 2, 3, 4].map(n => document.getElementById(`seg-${n}`))
 
     segs.forEach((seg, i) => {
+        if (!seg) return
         seg.className = 'strength-seg'
-        if (i < score) seg.classList.add(strengthClasses[score])
+        if (i < score) {
+            seg.classList.add(strengthClasses[score])
+        }
     })
 
     document.getElementById('strength-hint').textContent = value.length
@@ -67,7 +72,7 @@ document.getElementById('password').addEventListener('input', (e) => {
         : ''    
 })
 
-
+//Toggle password et confirm_password visible ou non
 function initPasswordToggle(inputId, btnId) {
     const input = document.getElementById(inputId)
     const btn   = document.getElementById(btnId)
@@ -83,6 +88,7 @@ function initPasswordToggle(inputId, btnId) {
 initPasswordToggle('password', 'toggle-password')
 initPasswordToggle('password-confirm', 'toggle-password-confirm')
 
+//Valider l'inscription --> Check si c'est vide puis vérif de mail et password
 function validate(first_name, name, email, password, confirm, cgu) {
     let valid = true
     ;['prenom', 'nom', 'email', 'password', 'confirm', 'cgu'].forEach(clearError)
@@ -112,12 +118,13 @@ function validate(first_name, name, email, password, confirm, cgu) {
     return valid
 }
 
+//Insertion BDD inscription
 document.getElementById('form-inscription').addEventListener('submit', async (e) => {
     e.preventDefault()
     
     const first_name = document.getElementById('prenom').value.trim()
     const name = document.getElementById('nom').value.trim()
-    const email = document.getElementById('email').value
+    const email = document.getElementById('email').value.trim()
     const password = document.getElementById('password').value
     const confirm = document.getElementById('password-confirm').value
     const cgu = document.getElementById('cgu').checked
@@ -151,3 +158,4 @@ document.getElementById('form-inscription').addEventListener('submit', async (e)
         setLoading(false)
     }
 })
+

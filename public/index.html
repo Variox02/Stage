@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fournaise — Pizzeria Artisanale</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link href="css/style.css" rel="stylesheet"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fournaise — Pizzeria Artisanale</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -20,18 +20,12 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navMenu">
-    <ul class="navbar-nav ms-auto align-items-center gap-3">
-        <li class="nav-item"><a class="nav-link" href="#menu">Notre menu</a></li>
-        <li class="nav-item"><a class="nav-link" href="#how">Comment ça marche</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">À propos</a></li>
-        <li class="nav-item">
-        <a class="btn btn-rouge px-3 py-2 position-relative" href="#" id="cart-btn" title="Mon panier">
-            🛒 Panier
-            <span id="cart-badge">0</span>
-        </a>
-        </li>
-        <li class="nav-item"><a class="btn btn-brun px-4 py-2" href="connexion.html">Connexion</a></li>
-    </ul>
+        <ul class="navbar-nav ms-auto align-items-center gap-3">
+            <li class="nav-item"><a class="nav-link" href="index.html#menu">Notre menu</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#how">Comment ça marche</a></li>
+            <!-- JS -->
+            <div id="nav-auth-zone" class="d-flex align-items-center gap-3"></div>
+        </ul>
     </div>
 </div>
 </nav>
@@ -49,7 +43,7 @@
         </p>
         <div class="d-flex flex-wrap gap-3 mb-4">
         <a href="#menu" class="btn btn-rouge btn-lg px-4">Voir le menu</a>
-        <a href="#" class="btn btn-brun btn-lg px-4">Créer un compte</a>
+        <a href="inscription.html" class="btn btn-brun btn-lg px-4">Créer un compte</a>
         </div>
         <div class="d-flex align-items-center gap-2" style="color:var(--texte-muted); font-size:.85rem;">
         <span class="hero-badge-dot"></span>
@@ -163,8 +157,8 @@
             </div>
             <div class="col-md-2">
             <h6 class="mb-3" style="color:var(--beige);">Compte</h6>
-            <a class="footer-link" href="#">Connexion</a>
-            <a class="footer-link" href="#">Inscription</a>
+            <a class="footer-link" href="connexion.html">Connexion</a>
+            <a class="footer-link" href="inscription.html">Inscription</a>
             <a class="footer-link" href="#">Mes commandes</a>
             <a class="footer-link" href="#">Mon profil</a>
             </div>
@@ -176,7 +170,7 @@
             </div>
         </div>
         <div class="border-top mt-4 pt-3 text-center" style="border-color:rgba(245,237,216,.1) !important; color:rgba(245,237,216,.35); font-size:.78rem;">
-            © 2025 Fournaise — Tous droits réservés ·
+            © 2026 Fournaise — Tous droits réservés ·
             <a href="#" style="color:inherit;">Mentions légales</a> ·
             <a href="#" style="color:inherit;">CGU</a>
         </div>

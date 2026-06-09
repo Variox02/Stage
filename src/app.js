@@ -2,12 +2,19 @@ import express from 'express'
 import cors from 'cors'
 import pool from './config/db.js'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import cookieParser from 'cookie-parser'
 
 const app = express()
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost',
+  credentials: true   
+}))
 app.use(express.json()) 
 app.use(express.static('public'))
+app.use(cookieParser())
 
+//Obtenir le nom de tous les products
 app.get('/api/products', async (req, res) => {
   try {
     const result = await pool.query('SELECT name FROM product')
@@ -18,6 +25,7 @@ app.get('/api/products', async (req, res) => {
   }
 })
 
+//Requête insertion BDD
 app.post('/api/inscription', async (req, res) => {
   try{
     const { email, password, newsletter, first_name, name } = req.body
@@ -29,5 +37,61 @@ app.post('/api/inscription', async (req, res) => {
     res.status(500).json({ error: 'Erreur serveur'})
   }
 })
+
+//Requête vérif Connexion
+app.post('/api/connexion', async (req, res) => {
+  try{
+    const { email, password } = req.body
+    const result = await pool.query('SELECT id, email, password, isadmin, isdelivery FROM utilisateur WHERE email = $1', [email])
+    
+    if (result.rows.length === 0) {
+      return res.status(401).json({ error: 'Email ou mot de passe incorrect.' })
+    }
+    const user = result.rows[0]
+    const match = await bcrypt.compare(password, user.password)
+    if (!match) {
+      return res.status(401).json({ error: 'Email ou mot de passe incorrect.' })
+    }
+    //Création du token JWT
+    const token = jwt.sign(
+      { id: user.id, email: user.email, isadmin: user.isadmin, isdelivery: user.isdelivery, first_name: user.first_name },
+      process.env.JWT_SECRET,
+      { expiresIn: '24h' }
+    )
+    res.cookie('token', token, {
+      httpOnly: true,    
+      secure: false,     
+      sameSite: 'lax',
+      maxAge: 24 * 60 * 60 * 1000  // 24h en millisecondes
+    })
+    res.status(200).json({ message: 'Connecté !', first_name: user.first_name })
+  }catch (err){
+      console.error(err)
+      res.status(500).json({error: 'Erreur serveur'})
+    }
+})
+
+//api de Vérif du token JWT
+app.get('/api/me', (req, res) => {
+  const token = req.cookies.token
+  if (!token) return res.status(401).json({ error: 'Non connecté' })
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    res.json({ user: decoded })
+  } catch {
+    res.status(401).json({ error: 'Session expirée' })
+  }
+})
+
+//Déconnexion/clear du cookie
+app.post('/api/deconnexion', (req, res) => {
+  res.clearCookie('token', {
+    httpOnly: true,
+    sameSite: 'lax'
+  })
+  res.json({ message: 'Déconnecté !' })
+})
+
 
 app.listen(3000, () => console.log('Serveur lancé sur http://localhost:3000'))
