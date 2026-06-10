@@ -89,9 +89,8 @@ initPasswordToggle('password', 'toggle-password')
 initPasswordToggle('password-confirm', 'toggle-password-confirm')
 
 //Valider l'inscription --> Check si c'est vide puis vérif de mail et password
-function validate(first_name, name, email, password, confirm, cgu) {
-    let valid = true
-    ;['prenom', 'nom', 'email', 'password', 'confirm', 'cgu'].forEach(clearError)
+function validate(first_name, name, email, password, confirm, cgu, country, birth_date, address) {
+    let valid = true;['prenom', 'nom', 'email', 'password', 'confirm', 'cgu', 'country', 'birth_date', 'address'].forEach(clearError)
 
     if (!first_name) { showError('prenom', 'Champ requis.'); valid = false }
     if (!name)       { showError('nom',    'Champ requis.'); valid = false }
@@ -115,6 +114,19 @@ function validate(first_name, name, email, password, confirm, cgu) {
         showError('cgu', 'Vous devez accepter les CGU pour continuer.'); valid = false
     }
 
+    if(!country) { showError('country',' Champ requis.'); valid = false}
+    if(!birth_date) { 
+        showError('birth_date',' Veuillez mettre votre âge.'); valid = false
+    } else {
+        const today = new Date()
+        const birth = new Date(birth_date)
+
+        const age = today.getFullYear() - birth.getFullYear()
+        if (age < 16) {
+            showError('birth_date', 'Vous devez avoir au moins 16 ans.'); valid = false
+        }
+    }
+    if(!address) { showError ('address', 'Champ requis.'); valid = false }
     return valid
 }
 
@@ -129,16 +141,39 @@ document.getElementById('form-inscription').addEventListener('submit', async (e)
     const confirm = document.getElementById('password-confirm').value
     const cgu = document.getElementById('cgu').checked
     const newsletter = document.getElementById('newsletter').checked
+    const country = document.getElementById('country').value
+    const birth_date = document.getElementById('birth_date').value
+    const address = document.getElementById('address').value
 
-    if (!validate(first_name, name, email, password, confirm, cgu)) return
+    if (!validate(first_name, name, email, password, confirm, cgu, country, birth_date, address)) return
 
     setLoading(true)
+    let emailDisponible
+    try {
+        const checkRes = await fetch('http://localhost:3000/api/verifMail', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        })
+        const checkData = await checkRes.json()
+        emailDisponible = checkData.exists === false
+    } catch (err) {
+        console.error(err)
+        showAlert('Erreur avec le serveur')
+        setLoading(false)
+        return
+    }
 
+    if (!emailDisponible) {
+        showError('email', 'Cette adresse e-mail est déjà utilisée.')
+        setLoading(false)
+        return
+    }
     try {
     const response = await fetch('http://localhost:3000/api/inscription', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ first_name, name, email, password, newsletter })
+        body: JSON.stringify({ first_name, name, email, password, newsletter, country, birth_date, address })
     })
 
     const data = await response.json()
@@ -149,7 +184,7 @@ document.getElementById('form-inscription').addEventListener('submit', async (e)
     }
 
     showAlert('Compte créé avec succès ! Redirection…', 'success')
-    setTimeout(() => { window.location.href = 'stage/public/connexion.html' }, 2000)
+    setTimeout(() => { window.location.href = '/connexion.html' }, 2000)
 
     } catch (err) {
         console.error(err)

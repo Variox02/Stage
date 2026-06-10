@@ -25,12 +25,23 @@ app.get('/api/products', async (req, res) => {
   }
 })
 
+//Check si mail déjà utilisé
+app.post('/api/verifMail', async (req, res) => {
+  try {
+    const { email } = req.body
+    const result = await pool.query('SELECT id FROM utilisateur WHERE email = $1', [email])
+    res.json({ exists: result.rowCount > 0 })  
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: 'Erreur serveur' })
+  }
+})
 //Requête insertion BDD
 app.post('/api/inscription', async (req, res) => {
   try{
-    const { email, password, newsletter, first_name, name } = req.body
+    const { email, password, newsletter, first_name, name, country, birth_date, address } = req.body
     const hashedPassword = await bcrypt.hash(password, 10)
-    const result = await pool.query('INSERT INTO utilisateur (email, password, newsletter, first_name, name) VALUES ($1, $2, $3, $4, $5)',  [email, hashedPassword, newsletter, first_name, name])
+    const result = await pool.query('INSERT INTO utilisateur (email, password, newsletter, first_name, name, country, birth_date, address) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',  [email, hashedPassword, newsletter, first_name, name, country, birth_date, address])
     res.status(201).json({message: 'Compte créé avec succès !'})
   } catch (err) {
     console.error(err)
