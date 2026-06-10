@@ -1,0 +1,62 @@
+//Fichier pour générer la navbar appelé par les autres
+import { getUser } from './checkcookie.js'
+
+export async function checkAuth() {
+    try {
+        const user = await getUser()
+
+        if (!user) {
+        renderNavbarGuest()
+        return null
+        }
+
+        renderNavbarUser(user)
+        return user
+
+    } catch {
+        renderNavbarGuest()
+        return null
+    }
+}
+
+export function renderNavbarGuest() {
+    document.getElementById('nav-auth-zone').innerHTML = `
+        <li class="nav-item">
+        <a class="btn btn-rouge px-3 py-2 position-relative" href="#" id="cart-btn">
+            🛒 Panier <span id="cart-badge" style="display:none;">0</span>
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="btn btn-brun px-4 py-2" href="connexion.html">Connexion</a>
+        </li>
+    `
+}
+export function renderNavbarUser(user) {
+    document.getElementById('nav-auth-zone').innerHTML = `
+        <a class="btn btn-rouge px-3 py-2 position-relative" href="#" id="cart-btn">
+        🛒 Panier <span id="cart-badge" style="display:none;">0</span>
+        </a>
+        <a class="btn btn-rouge px-4 py-2" href="menu.html" id="btn-commander">
+        🍕 Commander
+        </a>
+        <div class="dropdown">
+        <a class="btn btn-brun px-4 py-2 dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-display="static">
+            👤 ${user.first_name}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" data-bs-display="static">
+            <li><a class="dropdown-item" href="profil.html">Mon profil</a></li>
+            <li><a class="dropdown-item" href="commandes.html">Mes commandes</a></li>
+            ${user.isadmin ? '<li><a class="dropdown-item text-danger" href="admin/index.html">Administration</a></li>' : ''}
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" id="btn-deconnexion">Déconnexion</a></li>
+        </ul>
+        </div>
+    `
+    document.getElementById('btn-deconnexion').addEventListener('click', async () => {
+        await fetch('http://localhost:3000/api/deconnexion', { 
+        method: 'POST', 
+        credentials: 'include' 
+        })
+        window.location.href = 'index.html'
+    })
+}

@@ -13,21 +13,21 @@
 
 <nav id="navbar" class="navbar navbar-expand-lg fixed-top py-0" style="height:64px;">
     <div class="container">
-    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-    Fournaise <small>Pizzeria artisanale</small>
-    </a>
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto align-items-center gap-3">
-            <li class="nav-item"><a class="nav-link" href="index.html#menu">Notre menu</a></li>
-            <li class="nav-item"><a class="nav-link" href="index.html#how">Comment ça marche</a></li>
-            <!-- JS -->
-            <div id="nav-auth-zone" class="d-flex align-items-center gap-3"></div>
-        </ul>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        Fournaise <small>Pizzeria artisanale</small>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto align-items-center gap-3">
+                <li class="nav-item"><a class="nav-link" href="index.html#menu">Notre menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#how">Comment ça marche</a></li>
+                <!-- JS -->
+                <li id="nav-auth-zone" class="d-flex align-items-center gap-3 list-unstyled mb-0"></li>
+            </ul>
+        </div>
     </div>
-</div>
 </nav>
 
 <section id="hero" class="d-flex align-items-center" style="padding-top:64px; min-height:100vh;">
@@ -160,7 +160,7 @@
             <a class="footer-link" href="connexion.html">Connexion</a>
             <a class="footer-link" href="inscription.html">Inscription</a>
             <a class="footer-link" href="#">Mes commandes</a>
-            <a class="footer-link" href="#">Mon profil</a>
+            <a class="footer-link" href="profil.html">Mon profil</a>
             </div>
             <div class="col-md-4">
             <h6 class="mb-3" style="color:var(--beige);">Contact</h6>
@@ -178,7 +178,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/script.js"></script>
+<script type="module" src="js/index.js"></script>
 
 </body>
 </html>

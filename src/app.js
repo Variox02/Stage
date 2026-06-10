@@ -14,10 +14,16 @@ app.use(express.json())
 app.use(express.static('public'))
 app.use(cookieParser())
 
-//Obtenir le nom de tous les products
+import editProfilRouter from './editprofil.js'
+
+app.use(editProfilRouter)
+
+//Obtenir tous les products pour les afficher
 app.get('/api/products', async (req, res) => {
   try {
-    const result = await pool.query('SELECT name FROM product')
+    const result = await pool.query(
+      'SELECT id, name, description, price, stock FROM product WHERE stock > 0 ORDER BY name ASC'
+    )
     res.json(result.rows)
   } catch (err) {
     console.error(err)
@@ -53,7 +59,7 @@ app.post('/api/inscription', async (req, res) => {
 app.post('/api/connexion', async (req, res) => {
   try{
     const { email, password } = req.body
-    const result = await pool.query('SELECT id, email, password, isadmin, isdelivery FROM utilisateur WHERE email = $1', [email])
+    const result = await pool.query('SELECT id, first_name, email, password, isadmin, isdelivery FROM utilisateur WHERE email = $1', [email])
     
     if (result.rows.length === 0) {
       return res.status(401).json({ error: 'Email ou mot de passe incorrect.' })
@@ -65,7 +71,7 @@ app.post('/api/connexion', async (req, res) => {
     }
     //Création du token JWT
     const token = jwt.sign(
-      { id: user.id, email: user.email, isadmin: user.isadmin, isdelivery: user.isdelivery, first_name: user.first_name },
+      { id: user.id},
       process.env.JWT_SECRET,
       { expiresIn: '24h' }
     )
@@ -73,7 +79,7 @@ app.post('/api/connexion', async (req, res) => {
       httpOnly: true,    
       secure: false,     
       sameSite: 'lax',
-      maxAge: 24 * 60 * 60 * 1000  // 24h en millisecondes
+      maxAge: 24 * 60 * 60 * 1000  
     })
     res.status(200).json({ message: 'Connecté !', first_name: user.first_name })
   }catch (err){
@@ -82,14 +88,22 @@ app.post('/api/connexion', async (req, res) => {
     }
 })
 
-//api de Vérif du token JWT
-app.get('/api/me', (req, res) => {
+//api de Vérif du user et de ses infos
+app.get('/api/me', async (req, res) => {
   const token = req.cookies.token
   if (!token) return res.status(401).json({ error: 'Non connecté' })
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    res.json({ user: decoded })
+
+    const result = await pool.query('SELECT id, first_name, email, isadmin, isdelivery FROM utilisateur WHERE id = $1',[decoded.id])
+
+    if (result.rowCount === 0) {
+      return res.status(401).json({ error: 'Utilisateur introuvable' })
+    }
+
+    res.json({ user: result.rows[0] })
+
   } catch {
     res.status(401).json({ error: 'Session expirée' })
   }

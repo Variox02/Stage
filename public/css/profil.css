@@ -1,0 +1,274 @@
+/* =============================================
+   profil.css — Page Mon profil
+   Fournaise Pizzeria Artisanale
+   ============================================= */
+
+.profil-body {
+  background: var(--creme);
+}
+
+/* ─── En-tête ─── */
+
+.profil-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+@media (max-width: 576px) {
+  .profil-header { flex-direction: column; text-align: center; }
+}
+
+.profil-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--rouge);
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profil-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--texte);
+  margin-bottom: 0.2rem;
+}
+
+.profil-email {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--texte-muted);
+  margin-bottom: 0.5rem;
+}
+
+.profil-badge {
+  display: inline-block;
+  background: var(--beige);
+  border: 1px solid var(--beige-dark);
+  border-radius: 2rem;
+  padding: 0.2rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--brun);
+}
+
+/* ─── Navigation latérale ─── */
+
+.profil-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  position: sticky;
+  top: 80px;
+}
+
+.profil-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 0.75rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--texte-muted);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.profil-nav-item:hover {
+  background: var(--beige);
+  color: var(--texte);
+}
+
+.profil-nav-item.active {
+  background: var(--beige);
+  color: var(--rouge);
+  font-weight: 500;
+}
+
+.profil-nav-icon { font-size: 1rem; flex-shrink: 0; }
+
+.profil-nav-divider {
+  height: 1px;
+  background: var(--beige-dark);
+  margin: 0.5rem 0;
+}
+
+.profil-nav-danger { color: var(--rouge) !important; }
+.profil-nav-danger:hover {
+  background: rgba(200, 53, 42, 0.07) !important;
+  color: var(--rouge-dark) !important;
+}
+
+/* ─── Carte section ─── */
+
+.profil-card {
+  background: #fff;
+  border: 1px solid var(--beige-dark);
+  border-radius: 1.25rem;
+  padding: 1.75rem 2rem;
+}
+
+@media (max-width: 576px) {
+  .profil-card { padding: 1.25rem 1rem; }
+}
+
+.profil-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.profil-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--texte);
+  margin-bottom: 0.2rem;
+}
+
+.profil-card-subtitle {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--texte-muted);
+  margin-bottom: 0;
+}
+
+/* ─── Affichage des infos en lecture seule ─── */
+
+.field-display {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.6rem 0.9rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  color: var(--texte);
+  background: var(--beige);
+  border: 1px solid var(--beige-dark);
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.field-display-muted {
+  color: var(--texte-muted);
+  font-style: italic;
+}
+
+/* ─── Actions formulaire ─── */
+
+.profil-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.profil-actions .btn-auth {
+  width: auto;
+  padding: 0 1.5rem;
+}
+
+/* ─── État vide commandes ─── */
+
+.profil-empty {
+  text-align: center;
+  padding: 2.5rem 1rem;
+}
+
+.profil-empty-icon {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.4;
+}
+
+.profil-empty-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--texte);
+  margin-bottom: 0.4rem;
+}
+
+.profil-empty-sub {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--texte-muted);
+  margin-bottom: 0;
+}
+
+/* ─── Préférences toggles ─── */
+
+.pref-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--beige-dark);
+}
+
+.pref-item:last-of-type { border-bottom: none; }
+
+.pref-info { display: flex; flex-direction: column; gap: 0.2rem; }
+
+.pref-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--texte);
+}
+
+.pref-desc {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--texte-muted);
+}
+
+.pref-toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.pref-toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+
+.pref-toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--beige-dark);
+  border-radius: 24px;
+  transition: background 0.2s;
+}
+
+.pref-toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+
+.pref-toggle input:checked + .pref-toggle-slider { background: var(--rouge); }
+.pref-toggle input:checked + .pref-toggle-slider::before { transform: translateX(20px); }
