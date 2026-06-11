@@ -22,7 +22,7 @@ async function loadMenu() {
     const error = document.getElementById('menu-error')
 
     try {
-        const res = await fetch('http://localhost:3000/api/products')
+        const res = await fetch('/api/products')
         const products = await res.json()
 
         spinner.classList.add('d-none')

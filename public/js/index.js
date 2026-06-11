@@ -21,7 +21,7 @@ function getEmojiForPizza(name) {
 //Fonction pour afficher tous les produits link aux emojis
 async function loadProducts() {
   try {
-    const response = await fetch('http://localhost:3000/api/products')
+    const response = await fetch('/api/products')
     const products = await response.json()
 
     const track = document.getElementById('band-track')
@@ -59,7 +59,7 @@ async function loadMenu() {
   const error = document.getElementById('menu-error')
 
   try {
-    const res = await fetch('http://localhost:3000/api/products')
+    const res = await fetch('/api/products')
     const products = await res.json()
 
     spinner.classList.add('d-none')

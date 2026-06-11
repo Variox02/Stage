@@ -151,7 +151,7 @@ document.getElementById('form-inscription').addEventListener('submit', async (e)
     setLoading(true)
     let emailDisponible
     try {
-        const checkRes = await fetch('http://localhost:3000/api/verifMail', {
+        const checkRes = await fetch('/api/verifMail', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
@@ -171,7 +171,7 @@ document.getElementById('form-inscription').addEventListener('submit', async (e)
         return
     }
     try {
-    const response = await fetch('http://localhost:3000/api/inscription', {
+    const response = await fetch('/api/inscription', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ first_name, name, email, password, newsletter, country, birth_date, address })

@@ -53,7 +53,7 @@ export function renderNavbarUser(user) {
         </div>
     `
     document.getElementById('btn-deconnexion').addEventListener('click', async () => {
-        await fetch('http://localhost:3000/api/deconnexion', { 
+        await fetch('/api/deconnexion', { 
         method: 'POST', 
         credentials: 'include' 
         })

@@ -6,7 +6,7 @@ let currentUser = null
 //Affichage des données utilisateurs, fetch dans editprofil.js
 async function loadUser() {
     try {
-        const res = await fetch('http://localhost:3000/api/getUser', {
+        const res = await fetch('/api/getUser', {
             credentials: 'include'
         })
 
@@ -62,7 +62,7 @@ document.getElementById('form-securite').addEventListener('submit', async (e) =>
     }
 
     try{
-        const res = await fetch('http://localhost:3000/api/updatePassword', {
+        const res = await fetch('/api/updatePassword', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -114,7 +114,7 @@ document.getElementById('form-infos').addEventListener('submit', async (e) => {
     }
 
     try {
-        const res = await fetch('http://localhost:3000/api/updateUser', {
+        const res = await fetch('/api/updateUser', {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
@@ -136,7 +136,7 @@ loadUser()
 
 async function loadCommandes() {
     try {
-        const res = await fetch('http://localhost:3000/api/getCommandes', {
+        const res = await fetch('/api/getCommandes', {
             credentials: 'include'
         })
 

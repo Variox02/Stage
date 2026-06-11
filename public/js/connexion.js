@@ -50,7 +50,7 @@ document.getElementById('form-connexion').addEventListener('submit', async (e) =
     const email = document.getElementById('email').value.trim()
     const password = document.getElementById('password').value
     try {
-        const response = await fetch('http://localhost:3000/api/connexion', {
+        const response = await fetch('/api/connexion', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',

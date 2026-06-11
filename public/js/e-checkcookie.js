@@ -1,7 +1,7 @@
 //Page de fonction servant à être appelé dans d'autres fichiers pour check si l'utilisateur à un cookie et si oui, est-ce qu'il est admin ou non
 export async function getUser() {
     try {
-        const res = await fetch('http://localhost:3000/api/me', {
+        const res = await fetch('/api/me', {
         credentials: 'include'
         });
 
