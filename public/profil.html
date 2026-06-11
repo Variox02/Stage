@@ -34,12 +34,12 @@
         <div class="container py-5">
 
         <div class="profil-header mb-5">
-            <div class="profil-avatar" id="profil-avatar">MD</div>
+            <div class="profil-avatar" id="profil-avatar"></div>
             <div class="profil-header-info">
             <!-- JS  -->
-            <h1 class="profil-name" id="profil-name">Marie Dupont</h1>
-            <p class="profil-email" id="profil-email">marie@exemple.fr</p>
-            <span class="profil-badge">Membre depuis novembre 2024</span>
+            <h1 class="profil-name" id="profil-name"></h1>
+            <p class="profil-email" id="profil-email"></p>
+            <span class="profil-badge"></span>
             </div>
         </div>
 
@@ -75,45 +75,54 @@
                 </div>
                 </div>
 
+                <form id="form-infos" novalidate>
                 <div class="row g-3">
-                <div class="col-sm-6">
-                    <div class="field-group">
-                    <label class="field-label">Prénom</label>
-                    <!-- JS -->
-                    <div class="field-display" id="profil-prenom">Marie</div>
+                    <div class="col-sm-6">
+                        <div class="field-group">
+                        <label class="field-label" for="profil-prenom">Prénom</label>
+                        <input class="field-input" type="text" id="profil-prenom" name="first_name" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="field-group">
-                    <label class="field-label">Nom</label>
-                    <div class="field-display" id="profil-nom">Dupont</div>
+                    <div class="col-sm-6">
+                        <div class="field-group">
+                        <label class="field-label" for="profil-nom">Nom</label>
+                        <input class="field-input" type="text" id="profil-nom" name="name" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="field-group">
-                    <label class="field-label">Adresse e-mail</label>
-                    <div class="field-display" id="profil-email-display">marie@exemple.fr</div>
+                    <div class="col-sm-6">
+                        <div class="field-group">
+                        <label class="field-label" for="profil-email-display">Adresse e-mail</label>
+                        <input class="field-input" type="email" id="profil-email-display" name="email" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="field-group">
-                    <label class="field-label">Pays</label>
-                    <div class="field-display" id="profil-country">Non renseigné</div>
+                    <div class="col-sm-6">
+                        <div class="field-group">
+                        <label class="field-label" for="profil-country">Pays</label>
+                        <input class="field-input" type="text" id="profil-country" name="country" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-12">
-                    <div class="field-group">
-                    <label class="field-label">Adresse de livraison</label>
-                    <div class="field-display" id="profil-address">Non renseignée</div>
+                    <div class="col-12">
+                        <div class="field-group">
+                        <label class="field-label" for="profil-address">Adresse de livraison</label>
+                        <input class="field-input" type="text" id="profil-address" name="address" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="field-group">
-                    <label class="field-label">Date de naissance</label>
-                    <div class="field-display" id="profil-birthdate">Non renseignée</div>
+                    <div class="pref-item">
+                    <div class="pref-info">
+                    <span class="pref-label">Newsletter</span>
+                    <span class="pref-desc">Recevez nos offres et nouveautés par e-mail</span>
                     </div>
+                    <!-- JS  -->
+                    <label class="pref-toggle">
+                    <input type="checkbox" id="pref-newsletter" name="newsletter" />
+                    <span class="pref-toggle-slider"></span>
+                    </label>
                 </div>
                 </div>
+                <div class="profil-actions mt-4">
+                    <button type="submit" class="btn-auth btn-rouge-auth">Enregistrer</button>
+                </div>
+                </form>
             </div>
 
             <div id="section-commandes" class="profil-card mb-4">
@@ -175,42 +184,6 @@
                 </div>
                 <div class="profil-actions mt-4">
                     <button type="submit" class="btn-auth btn-rouge-auth">Changer le mot de passe</button>
-                </div>
-                </form>
-            </div>
-
-            <div id="section-preferences" class="profil-card mb-4">
-                <div class="profil-card-header">
-                <div>
-                    <h2 class="profil-card-title">Préférences</h2>
-                    <p class="profil-card-subtitle">Gérez vos communications</p>
-                </div>
-                </div>
-
-                <form id="form-preferences" novalidate>
-                <div class="pref-item">
-                    <div class="pref-info">
-                    <span class="pref-label">Newsletter</span>
-                    <span class="pref-desc">Recevez nos offres et nouveautés par e-mail</span>
-                    </div>
-                    <!-- JS  -->
-                    <label class="pref-toggle">
-                    <input type="checkbox" id="pref-newsletter" name="newsletter" />
-                    <span class="pref-toggle-slider"></span>
-                    </label>
-                </div>
-                <div class="pref-item">
-                    <div class="pref-info">
-                    <span class="pref-label">Notifications de commande</span>
-                    <span class="pref-desc">Soyez alerté à chaque étape de votre livraison</span>
-                    </div>
-                    <label class="pref-toggle">
-                    <input type="checkbox" id="pref-notif-commande" name="notif_commande" checked />
-                    <span class="pref-toggle-slider"></span>
-                    </label>
-                </div>
-                <div class="profil-actions mt-4">
-                    <button type="submit" class="btn-auth btn-rouge-auth">Enregistrer</button>
                 </div>
                 </form>
             </div>

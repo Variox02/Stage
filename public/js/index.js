@@ -1,5 +1,5 @@
 // Page index.html
-import { checkAuth } from './navbar.js'
+import { checkAuth } from './e-navbar.js'
 
 //Emoji pour bandeau
 function getEmojiForPizza(name) {

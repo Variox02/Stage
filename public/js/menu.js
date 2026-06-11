@@ -1,0 +1,99 @@
+import { checkAuth } from './e-navbar.js'
+
+function getEmojiForPizza(name) {
+    const n = name.toLowerCase()
+    if (n.includes('fromage')) return '🧀'
+    if (n.includes('marg')) return '🍅'
+    if (n.includes('piment')) return '🌶️'
+    if (n.includes('champ')) return '🍄'
+    if (n.includes('reine')) return '👑'
+    if (n.includes('bbq')) return '🔥'
+    if (n.includes('veggie')) return '🥦'
+    if (n.includes('thon')) return '🐟'
+    if (n.includes('calzone')) return '🥟'
+    if (n.includes('bolognaise')) return '🍝'
+    return '🍕'
+}
+
+async function loadMenu() {
+    const grid = document.getElementById('menu-grid')
+    const spinner = document.getElementById('menu-spinner')
+    const error = document.getElementById('menu-error')
+
+    try {
+        const res = await fetch('http://localhost:3000/api/products')
+        const products = await res.json()
+
+        spinner.classList.add('d-none')
+
+        if (!products.length) {
+            grid.innerHTML = `<div class="col-12 text-center py-5"><p class="fs-4">😔 Aucune pizza disponible.</p></div>`
+            return
+        }
+
+        products.forEach(p => {
+            const emoji = getEmojiForPizza(p.name)
+            const price = parseFloat(p.price).toFixed(2)
+
+            const col = document.createElement('div')
+            col.className = 'col-md-6 col-lg-4'
+            col.innerHTML = `
+                <div class="card h-100 pizza-card border-0 shadow-sm">
+                    <div class="pizza-card-img bg-warning bg-opacity-10">${emoji}</div>
+                    <div class="card-body px-4 pb-4 d-flex flex-column">
+                        <h5 class="pizza-name mb-1">${p.name}</h5>
+                        <p class="pizza-ingr mb-3 flex-grow-1">${p.description || 'Pas de description disponible.'}</p>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <span class="pizza-price">${price} € <small class="fw-normal text-muted">/ 30cm</small></span>
+                            <button class="btn btn-rouge btn-sm add-to-cart" data-id="${p.id}" data-name="${p.name}" data-price="${p.price}">
+                                🛒 Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `
+            grid.appendChild(col)
+        })
+
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', () => addToCart(btn.dataset))
+        })
+
+    } catch (err) {
+        console.error(err)
+        spinner.classList.add('d-none')
+        error.textContent = 'Impossible de charger le menu.'
+        error.classList.remove('d-none')
+    }
+}
+
+function addToCart({ id, name, price }) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || []
+
+    const existing = cart.find(item => item.id === id)
+    if (existing) {
+        existing.quantity += 1
+    } else {
+        cart.push({ id, name, price: parseFloat(price), quantity: 1 })
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart))
+    updateCartBadge()
+}
+
+function updateCartBadge() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || []
+    const total = cart.reduce((sum, item) => sum + item.quantity, 0)
+    const badge = document.getElementById('cart-badge')
+
+    if (badge) {
+        badge.textContent = total
+        badge.style.display = total > 0 ? 'inline-block' : 'none'
+    }
+}
+
+loadMenu()
+document.addEventListener('DOMContentLoaded', () => {
+    checkAuth()
+    updateCartBadge()
+})

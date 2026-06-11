@@ -1,5 +1,5 @@
 //Fichier pour générer la navbar appelé par les autres
-import { getUser } from './checkcookie.js'
+import { getUser } from './e-checkcookie.js'
 
 export async function checkAuth() {
     try {
