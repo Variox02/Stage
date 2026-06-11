@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "start": "node app.js"
+    "start": "node src/app.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
