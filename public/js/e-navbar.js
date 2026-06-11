@@ -22,7 +22,7 @@ export async function checkAuth() {
 export function renderNavbarGuest() {
     document.getElementById('nav-auth-zone').innerHTML = `
         <li class="nav-item">
-        <a class="btn btn-rouge px-3 py-2 position-relative" href="#" id="cart-btn">
+        <a class="btn btn-rouge px-3 py-2 position-relative" href="#" id="cart-btn" data-bs-toggle="modal" data-bs-target="#cartModal">
             🛒 Panier <span id="cart-badge" style="display:none;">0</span>
         </a>
         </li>
@@ -33,8 +33,8 @@ export function renderNavbarGuest() {
 }
 export function renderNavbarUser(user) {
     document.getElementById('nav-auth-zone').innerHTML = `
-        <a class="btn btn-rouge px-3 py-2 position-relative" href="#" id="cart-btn">
-        🛒 Panier <span id="cart-badge" style="display:none;">0</span>
+        <a class="btn btn-rouge px-3 py-2 position-relative" href="#" id="cart-btn" data-bs-toggle="modal" data-bs-target="#cartModal">
+            🛒 Panier <span id="cart-badge" style="display:none;">0</span>
         </a>
         <a class="btn btn-rouge px-4 py-2" href="menu.html" id="btn-commander">
         🍕 Commander

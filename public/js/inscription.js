@@ -1,4 +1,5 @@
 // Page inscription.html
+import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
 function showError(fieldId, message) {
     const field = document.getElementById(fieldId)
     const error = document.getElementById(`${fieldId}-error`)
@@ -193,4 +194,7 @@ document.getElementById('form-inscription').addEventListener('submit', async (e)
         setLoading(false)
     }
 })
-
+document.addEventListener('DOMContentLoaded', () => { 
+    updateCartBadge(), 
+    renderCart() 
+})

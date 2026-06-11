@@ -1,5 +1,6 @@
 //Js de la page profil.html
 import { checkAuth } from './e-navbar.js'
+import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
 
 let currentUser = null
 //Affichage des données utilisateurs, fetch dans editprofil.js
@@ -181,4 +182,7 @@ async function loadCommandes() {
 
 loadCommandes()
 
-document.addEventListener('DOMContentLoaded', checkAuth)
+document.addEventListener('DOMContentLoaded', () => { 
+    updateCartBadge(), 
+    renderCart() 
+})

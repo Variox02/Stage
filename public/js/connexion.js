@@ -1,4 +1,5 @@
 // Page connexion.html
+import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
 function showError(fieldId, message) {
     const field = document.getElementById(fieldId)
     const error = document.getElementById(`${fieldId}-error`)
@@ -69,4 +70,9 @@ document.getElementById('form-connexion').addEventListener('submit', async (e) =
         console.error(err)
         showAlert('Impossible de joindre le serveur.')
     }
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateCartBadge()
+    renderCart()  
 })

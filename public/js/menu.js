@@ -1,4 +1,5 @@
 import { checkAuth } from './e-navbar.js'
+import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
 
 function getEmojiForPizza(name) {
     const n = name.toLowerCase()
@@ -56,7 +57,11 @@ async function loadMenu() {
         })
 
         document.querySelectorAll('.add-to-cart').forEach(btn => {
-            btn.addEventListener('click', () => addToCart(btn.dataset))
+            btn.addEventListener('click', () => addToCart({
+                id:    btn.dataset.id,
+                name:  btn.dataset.name,
+                price: parseFloat(btn.dataset.price)  // ← string → number
+            }))
         })
 
     } catch (err) {
@@ -67,33 +72,9 @@ async function loadMenu() {
     }
 }
 
-function addToCart({ id, name, price }) {
-    const cart = JSON.parse(localStorage.getItem('cart')) || []
-
-    const existing = cart.find(item => item.id === id)
-    if (existing) {
-        existing.quantity += 1
-    } else {
-        cart.push({ id, name, price: parseFloat(price), quantity: 1 })
-    }
-
-    localStorage.setItem('cart', JSON.stringify(cart))
-    updateCartBadge()
-}
-
-function updateCartBadge() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || []
-    const total = cart.reduce((sum, item) => sum + item.quantity, 0)
-    const badge = document.getElementById('cart-badge')
-
-    if (badge) {
-        badge.textContent = total
-        badge.style.display = total > 0 ? 'inline-block' : 'none'
-    }
-}
-
 loadMenu()
 document.addEventListener('DOMContentLoaded', () => {
     checkAuth()
     updateCartBadge()
+    renderCart()  
 })

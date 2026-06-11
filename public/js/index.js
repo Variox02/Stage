@@ -1,6 +1,6 @@
 // Page index.html
 import { checkAuth } from './e-navbar.js'
-
+import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
 //Emoji pour bandeau
 function getEmojiForPizza(name) {
   const n = name.toLowerCase()
@@ -101,5 +101,7 @@ async function loadMenu() {
 }
 
 loadMenu()
-document.addEventListener('DOMContentLoaded', checkAuth)
-
+document.addEventListener('DOMContentLoaded', () => {
+  checkAuth, 
+  updateCartBadge(), 
+  renderCart() })
