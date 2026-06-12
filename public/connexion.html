@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <!-- Métadonnées de la page -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Connexion — Fournaise</title>
+  <!-- Styles externes et polices -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <link href="css/style.css" rel="stylesheet" />
@@ -11,11 +13,14 @@
 </head>
 <body class="auth-body">
 
+  <!-- Barre de navigation principale -->
   <nav id="navbar" class="navbar navbar-expand-lg fixed-top py-0" style="height:64px;">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
         Fournaise <small>Pizzeria artisanale</small>
       </a>
+      
+      <!-- Bouton mobile pour ouvrir/fermer le menu -->
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -50,8 +55,10 @@
 
         <form id="form-connexion" novalidate>
 
+          <!-- Message d'erreur global du formulaire -->
           <div id="auth-alert" class="auth-alert d-none" role="alert"></div>
 
+          <!-- Champ adresse e-mail -->
           <div class="field-group">
             <label class="field-label" for="email">Adresse e-mail</label>
             <input
@@ -66,6 +73,7 @@
             <div class="field-error" id="email-error"></div>
           </div>
 
+          <!-- Champ mot de passe avec bascule afficher/masquer -->
           <div class="field-group">
             <label class="field-label" for="password">Mot de passe</label>
             <div class="pass-wrap">
@@ -89,6 +97,7 @@
             <a href="mot-de-passe-oublie.html" class="forgot-link">Mot de passe oublié ?</a>
           </div>
 
+          <!-- Bouton de soumission du formulaire -->
           <button type="submit" class="btn-auth btn-rouge-auth" id="btn-submit">
             <span id="btn-text">Se connecter</span>
             <span id="btn-spinner" class="spinner-border spinner-border-sm d-none ms-2" role="status" aria-hidden="true"></span>
@@ -96,9 +105,10 @@
 
         </form>
 
+        <!-- Séparateur pour les alternatives de connexion -->
         <div class="auth-divider">
           <span class="auth-divider-line"></span>
-          <span class="auth-divider-text">ou continuer avec</span>
+          <span class="auth-divider-text">ou</span>
           <span class="auth-divider-line"></span>
         </div>
 
@@ -109,17 +119,18 @@
       </div>
     </div>
   </main>
-
+  
   <footer class="py-5">
     <div class="container">
       <div class="row g-4">
         <div class="col-md-4">
+          <!-- Pied de page avec description et liens utiles -->
           <h4 class="mb-2" style="color:var(--rouge); font-size:1.5rem;">Fournaise</h4>
           <p class="fw-light small" style="color:rgba(245,237,216,.6); line-height:1.8;">Pizzeria artisanale depuis 2010. Des pizzas préparées avec passion, cuites au feu de bois, livrées à votre porte.</p>
         </div>
         <div class="col-md-2">
           <h6 class="mb-3" style="color:var(--beige);">Menu</h6>
-          <a class="footer-link" href="#">Nos pizzas</a>
+          <a class="footer-link" href="menu.html">Nos pizzas</a>
           <a class="footer-link" href="#">Boissons</a>
           <a class="footer-link" href="#">Desserts</a>
           <a class="footer-link" href="#">Formules</a>
@@ -129,7 +140,7 @@
           <a class="footer-link" href="connexion.html">Connexion</a>
           <a class="footer-link" href="inscription.html">Inscription</a>
           <a class="footer-link" href="#">Mes commandes</a>
-          <a class="footer-link" href="#">Mon profil</a>
+          <a class="footer-link" href="profil.html">Mon profil</a>
         </div>
         <div class="col-md-4">
           <h6 class="mb-3" style="color:var(--beige);">Contact</h6>
@@ -148,6 +159,8 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/connexion.js"></script>
+
+  <!-- Modal Panier  -->
   <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-end modal-dialog-scrollable">
         <div class="modal-content">

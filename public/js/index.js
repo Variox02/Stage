@@ -1,7 +1,9 @@
-// Page index.html
+// Script de la page d'accueil (index.html)
 import { checkAuth } from './e-navbar.js'
 import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
-//Emoji pour bandeau
+
+// Retourne l'emoji correspondant au nom de la pizza
+// Utilisé pour l'affichage dans le bandeau défilant et les cartes
 function getEmojiForPizza(name) {
   const n = name.toLowerCase()
 
@@ -18,7 +20,8 @@ function getEmojiForPizza(name) {
   return '🍕' 
 }
 
-//Fonction pour afficher tous les produits link aux emojis
+// Charge les produits et remplit le bandeau défilant avec les noms de pizzas
+// Affiche chaque pizza deux fois pour un effet de défilement continu
 async function loadProducts() {
   try {
     const response = await fetch('/api/products')
@@ -31,7 +34,7 @@ async function loadProducts() {
       return
     }
 
-    //ForEach X2 pour un défilement continu
+    // Affiche chaque produit deux fois pour une boucle continue
     products.forEach(p => {
       const span = document.createElement('span')
       span.classList.add('band-item')
@@ -52,7 +55,8 @@ async function loadProducts() {
 }
 loadProducts()
 
-//Afficher les cartes des mennus
+// Charge et affiche les cartes des pizzas disponibles dans la section menu
+// Masque le spinner et gère les erreurs
 async function loadMenu() {
   const grid = document.getElementById('menu-grid')
   const spinner = document.getElementById('menu-spinner')
@@ -71,6 +75,7 @@ async function loadMenu() {
       return
     }
 
+    // Crée une carte pour chaque produit
     products.forEach(p => {
       const emoji = getEmojiForPizza(p.name)
       const price = parseFloat(p.price).toFixed(2)
@@ -101,7 +106,8 @@ async function loadMenu() {
 }
 
 loadMenu()
+// Initialise la navbar et le panier au chargement de la page
 document.addEventListener('DOMContentLoaded', () => {
-  checkAuth, 
+  checkAuth(), 
   updateCartBadge(), 
   renderCart() })

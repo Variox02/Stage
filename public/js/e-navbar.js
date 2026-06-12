@@ -1,6 +1,9 @@
-//Fichier pour générer la navbar appelé par les autres
+// Module de gestion de la barre de navigation
+// Génère dynamiquement la navbar en fonction de l'authentification de l'utilisateur
 import { getUser } from './e-checkcookie.js'
 
+// Vérifie l'authentification et affiche la navbar appropriée
+// Affiche soit la navbar "Invité", soit la navbar "Utilisateur connecté"
 export async function checkAuth() {
     try {
         const user = await getUser()
@@ -19,6 +22,8 @@ export async function checkAuth() {
     }
 }
 
+// Affiche la barre de navigation pour un utilisateur non authentifié
+// Affiche les boutons "Panier" et "Connexion"
 export function renderNavbarGuest() {
     document.getElementById('nav-auth-zone').innerHTML = `
         <li class="nav-item">

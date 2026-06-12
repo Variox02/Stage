@@ -1,17 +1,23 @@
 // Page connexion.html
 import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
+
+//fonction basique d'erreur
 function showError(fieldId, message) {
     const field = document.getElementById(fieldId)
     const error = document.getElementById(`${fieldId}-error`)
     if (field)  field.classList.add('is-invalid')
     if (error)  error.textContent = message
 }
+
+//fonction clear erreur
 function clearError(fieldId) {
     const field = document.getElementById(fieldId)
     const error = document.getElementById(`${fieldId}-error`)
     if (field)  field.classList.remove('is-invalid')
     if (error)  error.textContent = ''
 }
+
+//fonction loading à la création de compte
 function setLoading(state) {
     const btn     = document.getElementById('btn-submit')
     const btnText = document.getElementById('btn-text')
@@ -21,6 +27,8 @@ function setLoading(state) {
     btnText.textContent = state ? 'Chargement...' : 'Créer mon compte'
     spinner.classList.toggle('d-none', !state)
 }
+
+//fonction d'affichage d'alert
 function showAlert(message, type = 'error') {
     const alert = document.getElementById('auth-alert')
     if (!alert) return
@@ -47,9 +55,11 @@ initPasswordToggle('password', 'toggle-password')
 //Analyse du form connexion
 document.getElementById('form-connexion').addEventListener('submit', async (e) => {
     e.preventDefault()
+    //Récupère les identifiants donnés
     const email = document.getElementById('email').value.trim()
     const password = document.getElementById('password').value
     try {
+        //Récupère les indentifiants en BDD
         const response = await fetch('/api/connexion', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -63,7 +73,8 @@ document.getElementById('form-connexion').addEventListener('submit', async (e) =
             showAlert(data.error || 'Une erreur est survenue.')
             return
         }
-
+        
+        //Redirige si tout est bon
         window.location.href = 'index.html'
 
     } catch (err) {

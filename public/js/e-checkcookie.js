@@ -1,4 +1,8 @@
-//Page de fonction servant à être appelé dans d'autres fichiers pour check si l'utilisateur à un cookie et si oui, est-ce qu'il est admin ou non
+// Module de vérification d'authentification
+// Vérifie si l'utilisateur est connecté, admin ou livreur via les cookies de session
+
+// Récupère les informations de l'utilisateur actuellement connecté
+// Retourne null si l'utilisateur n'est pas authentifié
 export async function getUser() {
     try {
         const res = await fetch('/api/me', {
@@ -14,16 +18,22 @@ export async function getUser() {
     }
 }
 
+// Vérifie si un utilisateur est connecté (a une session active)
+// Retourne true/false
 export async function isLogged() {
     const user = await getUser();
     return user !== null;
 }
 
+// Vérifie si l'utilisateur connecté est administrateur
+// Retourne true uniquement si user.isadmin === true
 export async function isAdmin() {
     const user = await getUser();
     return user?.isadmin === true;
 }
 
+// Vérifie si l'utilisateur connecté est livreur
+// Retourne true uniquement si user.isdelivery === true
 export async function isLivreur() {
     const user = await getUser();
     return user?.isdelivery === true;

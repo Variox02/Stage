@@ -1,6 +1,8 @@
+// Script de la page menu.html
 import { checkAuth } from './e-navbar.js'
 import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
 
+// Retourne l'emoji correspondant au nom de la pizza
 function getEmojiForPizza(name) {
     const n = name.toLowerCase()
     if (n.includes('fromage')) return '🧀'
@@ -16,6 +18,8 @@ function getEmojiForPizza(name) {
     return '🍕'
 }
 
+// Charge et affiche toutes les pizzas disponibles
+// Chaque carte contient un bouton "Ajouter au panier"
 async function loadMenu() {
     const grid = document.getElementById('menu-grid')
     const spinner = document.getElementById('menu-spinner')
@@ -32,6 +36,7 @@ async function loadMenu() {
             return
         }
 
+        // Crée une carte pour chaque produit avec le bouton "Ajouter"
         products.forEach(p => {
             const emoji = getEmojiForPizza(p.name)
             const price = parseFloat(p.price).toFixed(2)
@@ -56,11 +61,12 @@ async function loadMenu() {
             grid.appendChild(col)
         })
 
+        // Attache les événements click aux boutons "Ajouter au panier"
         document.querySelectorAll('.add-to-cart').forEach(btn => {
             btn.addEventListener('click', () => addToCart({
                 id:    btn.dataset.id,
                 name:  btn.dataset.name,
-                price: parseFloat(btn.dataset.price)  // ← string → number
+                price: parseFloat(btn.dataset.price)  // Convertit string en number
             }))
         })
 
@@ -73,6 +79,8 @@ async function loadMenu() {
 }
 
 loadMenu()
+
+// Initialise la navbar et le panier au chargement de la page
 document.addEventListener('DOMContentLoaded', () => {
     checkAuth()
     updateCartBadge()
