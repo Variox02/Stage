@@ -58,7 +58,7 @@ export function renderNavbarUser(user) {
         </div>
     `
     document.getElementById('btn-deconnexion').addEventListener('click', async () => {
-        await fetch('/api/deconnexion', { 
+        await fetch('https://stage-ydwe.onrender.com/api/deconnexion', { 
         method: 'POST', 
         credentials: 'include' 
         })

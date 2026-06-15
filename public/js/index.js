@@ -24,7 +24,7 @@ function getEmojiForPizza(name) {
 // Affiche chaque pizza deux fois pour un effet de défilement continu
 async function loadProducts() {
   try {
-    const response = await fetch('/api/products')
+    const response = await fetch('https://stage-ydwe.onrender.com/api/products')
     const products = await response.json()
 
     const track = document.getElementById('band-track')
@@ -63,7 +63,7 @@ async function loadMenu() {
   const error = document.getElementById('menu-error')
 
   try {
-    const res = await fetch('/api/products')
+    const res = await fetch('https://stage-ydwe.onrender.com/api/products')
     const products = await res.json()
 
     spinner.classList.add('d-none')

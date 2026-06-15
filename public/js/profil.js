@@ -7,7 +7,7 @@ let currentUser = null
 // Charge et affiche les données de l'utilisateur connecté
 async function loadUser() {
     try {
-        const res = await fetch('/api/getUser', {
+        const res = await fetch('https://stage-ydwe.onrender.com/api/getUser', {
             credentials: 'include'
         })
 
@@ -69,7 +69,7 @@ document.getElementById('form-securite').addEventListener('submit', async (e) =>
     }
 
     try{
-        const res = await fetch('/api/updatePassword', {
+        const res = await fetch('https://stage-ydwe.onrender.com/api/updatePassword', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -126,7 +126,7 @@ document.getElementById('form-infos').addEventListener('submit', async (e) => {
     }
 
     try {
-        const res = await fetch('/api/updateUser', {
+        const res = await fetch('https://stage-ydwe.onrender.com/api/updateUser', {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
@@ -149,7 +149,7 @@ document.getElementById('form-infos').addEventListener('submit', async (e) => {
 // Charge l'historique des commandes de l'utilisateur
 async function loadCommandes() {
     try {
-        const res = await fetch('/api/getCommandes', {
+        const res = await fetch('https://stage-ydwe.onrender.com/api/getCommandes', {
             credentials: 'include'
         })
 

@@ -26,7 +26,7 @@ async function loadMenu() {
     const error = document.getElementById('menu-error')
 
     try {
-        const res = await fetch('/api/products')
+        const res = await fetch('https://stage-ydwe.onrender.com/api/products')
         const products = await res.json()
 
         spinner.classList.add('d-none')

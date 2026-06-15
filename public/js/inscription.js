@@ -172,7 +172,7 @@ document.getElementById('form-inscription').addEventListener('submit', async (e)
     // Vérifie que l'email n'est pas déjà utilisé
     let emailDisponible
     try {
-        const checkRes = await fetch('/api/verifMail', {
+        const checkRes = await fetch('https://stage-ydwe.onrender.com/api/verifMail', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
@@ -194,7 +194,7 @@ document.getElementById('form-inscription').addEventListener('submit', async (e)
 
     // Envoie la demande d'inscription au serveur
     try {
-    const response = await fetch('/api/inscription', {
+    const response = await fetch('https://stage-ydwe.onrender.com/api/inscription', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ first_name, name, email, password, newsletter, country, birth_date, address })

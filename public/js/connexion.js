@@ -60,7 +60,7 @@ document.getElementById('form-connexion').addEventListener('submit', async (e) =
     const password = document.getElementById('password').value
     try {
         //Récupère les indentifiants en BDD
-        const response = await fetch('/api/connexion', {
+        const response = await fetch('https://stage-ydwe.onrender.com/api/connexion', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
