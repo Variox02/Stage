@@ -1,0 +1,233 @@
+/* =============================================
+   ADMIN.CSS — Fournaise Administration
+   ============================================= */
+
+.admin-body {
+    background: #f4f0e8;
+}
+
+/* Navbar — badge "Administration" */
+.navbar-brand small {
+    color: var(--rouge) !important;
+    font-weight: 500;
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+.admin-nav-active {
+    color: var(--rouge) !important;
+    font-weight: 500;
+}
+
+/* ---- Cartes de statistiques ---- */
+.admin-stat-card {
+    background: #fff;
+    border: 1px solid var(--beige-dark);
+    border-radius: 1rem;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.admin-stat-card--warn {
+    border-color: #f0a500;
+    background: #fffbf0;
+}
+
+.admin-stat-card--danger {
+    border-color: var(--rouge);
+    background: #fff8f8;
+}
+
+.admin-stat-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.admin-stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--texte);
+    line-height: 1;
+}
+
+.admin-stat-label {
+    font-size: .78rem;
+    color: var(--texte-muted);
+    margin-top: .2rem;
+}
+
+/* ---- Carte principale ---- */
+.admin-card {
+    background: #fff;
+    border: 1px solid var(--beige-dark);
+    border-radius: 1.25rem;
+    padding: 1.75rem;
+}
+
+.admin-card-header h5 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--texte);
+}
+
+/* ---- Barre de recherche ---- */
+.admin-search {
+    border: 1.5px solid var(--beige-dark);
+    border-radius: 2rem;
+    padding: .45rem 1rem;
+    font-size: .85rem;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--creme);
+    color: var(--texte);
+    outline: none;
+    width: 220px;
+    transition: border-color .2s;
+}
+
+.admin-search:focus {
+    border-color: var(--rouge);
+}
+
+/* ---- Tableau ---- */
+.admin-table {
+    font-size: .875rem;
+    color: var(--texte);
+}
+
+.admin-table thead th {
+    font-size: .72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--texte-muted);
+    border-bottom: 1.5px solid var(--beige-dark);
+    padding-bottom: .75rem;
+}
+
+.admin-table tbody tr {
+    border-bottom: 1px solid var(--beige-dark);
+    transition: background .15s;
+}
+
+.admin-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.admin-table tbody tr:hover {
+    background: var(--creme);
+}
+
+.admin-product-name {
+    font-weight: 500;
+    color: var(--texte);
+}
+
+.admin-product-desc {
+    font-size: .8rem;
+    color: var(--texte-muted);
+    font-weight: 300;
+}
+
+.admin-price {
+    font-weight: 700;
+    color: var(--rouge);
+}
+
+/* ---- Badges de stock ---- */
+.admin-stock-badge {
+    display: inline-block;
+    min-width: 36px;
+    padding: .3rem .6rem;
+    border-radius: 2rem;
+    font-weight: 700;
+    font-size: .85rem;
+    text-align: center;
+}
+
+.admin-stock-ok {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.admin-stock-low {
+    background: #fff8e1;
+    color: #f57f17;
+}
+
+.admin-stock-rupture {
+    background: #ffebee;
+    color: var(--rouge-dark);
+}
+
+/* ---- Contrôles de quantité ---- */
+.admin-qty-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    background: var(--creme);
+    border: 1.5px solid var(--beige-dark);
+    border-radius: 2rem;
+    padding: .2rem .4rem;
+}
+
+.admin-qty-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: none;
+    background: var(--beige-dark);
+    color: var(--texte);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s;
+    line-height: 1;
+}
+
+.admin-qty-btn:hover {
+    background: var(--rouge);
+    color: #fff;
+}
+
+.admin-qty-input {
+    width: 44px;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .9rem;
+    font-weight: 600;
+    color: var(--texte);
+    outline: none;
+    -moz-appearance: textfield;
+}
+
+.admin-qty-input::-webkit-outer-spin-button,
+.admin-qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+/* ---- Bouton enregistrer ---- */
+.admin-btn-save {
+    background: var(--rouge);
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    padding: .35rem .9rem;
+    font-size: .78rem;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background .15s;
+}
+
+.admin-btn-save:hover {
+    background: var(--rouge-dark);
+}

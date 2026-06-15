@@ -93,4 +93,64 @@ Côté livreur :
     - Same as User
     - Vu et choix sur les commandes
     - Voir adresse de livraison + nom clients
-    - 
+    
+
+
+Architecture de fichier :
+
+Stage
+  |
+  |-database
+  |   |
+  |   |-script.sql (script de la bdd)
+  |
+  |-docs
+  |   |
+  |   |-README.md (consigne et info sur le projet)
+  |
+  |-public
+  |     |
+  |     |-admin
+  |     |   |
+  |     |   |-admin.html (page admin gestion utilisateurs stock et commandes)
+  |     |
+  |     |-css
+  |     |   |
+  |     |   |-admin.css  (CSS lié à admin.html)
+  |     |   |-auth.css   (CSS lié à connexion.html)
+  |     |   |-profil.css (CSS lié à profil.html)
+  |     |   |-style.css  (CSS lié à toutes les pages)
+  |     |
+  |     |-JS
+  |     |   |
+  |     |   |-admin-stock.js    (JS lié à admin.html)
+  |     |   |-connexion         (JS lié à connexio.html)
+  |     |   |-e-cartjs          (JS d'export pour le caddie)
+  |     |   |-e-checkcookie.js  (JS d'export pour check les cookies)
+  |     |   |-e-navbar.js       (JS d'export pour créer la navbar)
+  |     |   |-index.js          (JS lié à index.html)
+  |     |   |-inscription.js    (JS lié à inscription.html)
+  |     |   |-menu.js           (JS lié à menu.html)
+  |     |   |-profil.js         (JS lié à profil.html)
+  |     |
+  |     |-connexion.html
+  |     |-index.html
+  |     |-inscription.html
+  |     |-menu.html
+  |     |-profil.html
+  |
+  |-src
+  |   |
+  |   |-config
+  |   |     |
+  |   |     |-db.js
+  |   |
+  |   |-app.js
+  |   |-editprofil.js
+  | 
+  |-.env
+  |-.gitignore
+  |-package-lock.json
+  |-package.json
+  |
+  |

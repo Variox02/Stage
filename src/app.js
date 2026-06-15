@@ -41,7 +41,7 @@ app.get('/api/products', async (req, res) => {
   try {
     // Cherche uniquement les produits qui sont en stock.
     const result = await pool.query(
-      'SELECT id, name, description, price, stock FROM product WHERE stock > 0 ORDER BY name ASC'
+      'SELECT id, name, description, price, stock FROM product WHERE stock >= 0 ORDER BY name ASC'
     )
     res.json(result.rows)
   } catch (err) {
