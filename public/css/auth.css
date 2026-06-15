@@ -1,3 +1,4 @@
+/* Page d'authentification: structure generale de l'ecran */
 .auth-body {
     background: var(--creme);
     min-height: 100vh;
@@ -5,6 +6,7 @@
     flex-direction: column;
 }
 
+/* Zone principale qui centre la carte de connexion/inscription */
 .auth-main {
     flex: 1;
     display: flex;
@@ -12,6 +14,7 @@
     padding-bottom: 3rem;
 }
 
+/* Conteneur limite pour garder un formulaire lisible sur grand ecran */
 .auth-container {
     width: 100%;
     max-width: 460px;
@@ -19,6 +22,7 @@
     padding: 2rem 1rem;
 }
 
+/* Carte blanche qui contient le formulaire */
 .auth-card {
     background: #fff;
     border: 1px solid var(--beige-dark);
@@ -27,12 +31,14 @@
 }
 
 @media (max-width: 480px) {
+    /* Ajustements pour les petits ecrans */
     .auth-card {
         padding: 1.75rem 1.25rem;
         border-radius: 1rem;
     }
 }
 
+/* Bloc logo et nom de marque au-dessus du formulaire */
 .auth-logo {
     text-align: center;
     margin-bottom: 1.5rem;
@@ -61,6 +67,7 @@
     margin-top: 5px;
 }
 
+/* Titres et sous-titres du formulaire */
 .auth-title {
     font-family: 'Playfair Display', serif;
     font-size: 1.45rem;
@@ -78,6 +85,7 @@
     margin-bottom: 1.75rem;
 }
 
+/* Badge promotionnel ou message d'information */
 .promo-badge {
     background: var(--beige);
     border: 1px solid var(--beige-dark);
@@ -95,6 +103,7 @@
     color: var(--rouge);
 }
 
+/* Groupes de champs de formulaire */
 .field-group {
     margin-bottom: 1rem;
 }
@@ -122,6 +131,7 @@
     outline: none;
 }
 
+/* Etats de saisie et retour utilisateur */
 .field-input::placeholder {
     color: var(--texte-muted);
     opacity: .6;
@@ -157,6 +167,7 @@
     padding-left: 0.5rem;
 }
 
+/* Zone mot de passe avec bouton pour afficher/masquer le texte */
 .pass-wrap {
     position: relative;
 }
@@ -204,6 +215,7 @@
 .strength-seg.medium { background: var(--orange); }
 .strength-seg.strong { background: #198754; }
 
+/* Liens d'aide et actions secondaires */
 .forgot-link {
     font-size: 0.8rem;
     color: var(--rouge);
@@ -216,6 +228,7 @@
     text-decoration: underline;
 }
 
+/* Boutons principaux et alternatifs */
 .btn-auth {
     display: flex;
     align-items: center;
@@ -250,6 +263,7 @@
     cursor: not-allowed;
 }
 
+/* Separateur entre deux moyens d'action */
 .auth-divider {
     display: flex;
     align-items: center;
@@ -269,6 +283,7 @@
     white-space: nowrap;
 }
 
+/* Boutons de connexion via service tiers */
 .btn-social {
     display: flex;
     align-items: center;
@@ -293,6 +308,7 @@
     background: var(--beige);
 }
 
+/* Cases a cocher pour consentement et conditions */
 .check-row {
     display: flex;
     align-items: flex-start;
@@ -328,6 +344,7 @@
     text-decoration: underline;
 }
 
+/* Lien pour basculer entre connexion et inscription */
 .auth-switch-link {
     font-size: 0.82rem;
     font-weight: 300;
@@ -348,6 +365,7 @@
     text-decoration: underline;
 }
 
+/* Messages d'erreur et de succes affiches au-dessus du formulaire */
 .auth-alert {
     border-radius: 1rem;
     padding: 0.65rem 1rem;
@@ -367,6 +385,7 @@
     color: #0d5c38;
 }
 
+/* Pied de page du module d'authentification */
 .auth-footer {
     background: var(--texte);
     padding: 1rem 0;

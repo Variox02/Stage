@@ -1,13 +1,15 @@
 /* =============================================
-   profil.css — Page Mon profil
-   Fournaise Pizzeria Artisanale
-   ============================================= */
+  profil.css - Page Mon profil
+  Regroupe l'en-tete utilisateur, la navigation
+  laterale et les cartes de contenu.
+  ============================================= */
 
+/* Fond general de la page profil */
 .profil-body {
   background: var(--creme);
 }
 
-/* ─── En-tête ─── */
+/* Bloc d'identite utilisateur en haut de page */
 
 .profil-header {
   display: flex;
@@ -19,6 +21,7 @@
   .profil-header { flex-direction: column; text-align: center; }
 }
 
+/* Avatar initiales ou image de profil stylisee */
 .profil-avatar {
   width: 72px;
   height: 72px;
@@ -34,6 +37,7 @@
   flex-shrink: 0;
 }
 
+/* Nom, email et statut du compte */
 .profil-name {
   font-family: 'Playfair Display', serif;
   font-size: 1.6rem;
@@ -60,7 +64,7 @@
   color: var(--brun);
 }
 
-/* ─── Navigation latérale ─── */
+/* Navigation laterale pour naviguer entre les sections du profil */
 
 .profil-nav {
   display: flex;
@@ -112,7 +116,7 @@
   color: var(--rouge-dark) !important;
 }
 
-/* ─── Carte section ─── */
+/* Cartes principales qui contiennent les differents blocs du profil */
 
 .profil-card {
   background: #fff;
@@ -125,6 +129,7 @@
   .profil-card { padding: 1.25rem 1rem; }
 }
 
+/* En-tete interne d'une carte: titre et action eventuelle */
 .profil-card-header {
   display: flex;
   align-items: flex-start;
@@ -148,7 +153,7 @@
   margin-bottom: 0;
 }
 
-/* ─── Affichage des infos en lecture seule ─── */
+/* Champs en lecture seule pour afficher les informations du compte */
 
 .field-display {
   width: 100%;
@@ -169,7 +174,7 @@
   font-style: italic;
 }
 
-/* ─── Actions formulaire ─── */
+/* Boutons d'action du formulaire profil */
 
 .profil-actions {
   display: flex;
@@ -183,7 +188,7 @@
   padding: 0 1.5rem;
 }
 
-/* ─── État vide commandes ─── */
+/* Etat vide pour une section sans commandes ou sans contenu */
 
 .profil-empty {
   text-align: center;
@@ -210,7 +215,7 @@
   margin-bottom: 0;
 }
 
-/* ─── Préférences toggles ─── */
+/* Ligne de preference avec interrupteur */
 
 .pref-item {
   display: flex;
