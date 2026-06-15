@@ -37,7 +37,7 @@ app.use(editProfilRouter)
 // -----------------------------------------------------------
 // Route publique : liste des produits disponibles en stock
 // -----------------------------------------------------------
-app.get('https://stageback.onrender.com/api/products', async (req, res) => {
+app.get('/api/products', async (req, res) => {
   try {
     // Cherche uniquement les produits qui sont en stock.
     const result = await pool.query(
@@ -53,7 +53,7 @@ app.get('https://stageback.onrender.com/api/products', async (req, res) => {
 // -----------------------------------------------------------
 // Route publique : vérifie si un email existe déjà
 // -----------------------------------------------------------
-app.post('https://stageback.onrender.com/api/verifMail', async (req, res) => {
+app.post('/api/verifMail', async (req, res) => {
   try {
     const { email } = req.body
     const result = await pool.query('SELECT id FROM utilisateur WHERE email = $1', [email])
@@ -69,7 +69,7 @@ app.post('https://stageback.onrender.com/api/verifMail', async (req, res) => {
 // -----------------------------------------------------------
 // Route publique : création d'un nouveau compte utilisateur
 // -----------------------------------------------------------
-app.post('https://stageback.onrender.com/api/inscription', async (req, res) => {
+app.post('/api/inscription', async (req, res) => {
   try {
     const { email, password, newsletter, first_name, name, country, birth_date, address } = req.body
 
@@ -91,7 +91,7 @@ app.post('https://stageback.onrender.com/api/inscription', async (req, res) => {
 // -----------------------------------------------------------
 // Route publique : connexion utilisateur et génération du JWT
 // -----------------------------------------------------------
-app.post('https://stageback.onrender.com/api/connexion', async (req, res) => {
+app.post('/api/connexion', async (req, res) => {
   try {
     const { email, password } = req.body
 
@@ -139,7 +139,7 @@ app.post('https://stageback.onrender.com/api/connexion', async (req, res) => {
 // -----------------------------------------------------------
 // Route protégée : vérifie le token et renvoie les infos de session
 // -----------------------------------------------------------
-app.get('https://stageback.onrender.com/api/me', async (req, res) => {
+app.get('/api/me', async (req, res) => {
   const token = req.cookies.token
   if (!token) return res.status(401).json({ error: 'Non connecté' })
 
@@ -165,7 +165,7 @@ app.get('https://stageback.onrender.com/api/me', async (req, res) => {
 // -----------------------------------------------------------
 // Route publique : déconnexion en effaçant le cookie JWT
 // -----------------------------------------------------------
-app.post('https://stageback.onrender.com/api/deconnexion', (req, res) => {
+app.post('/api/deconnexion', (req, res) => {
   res.clearCookie('token', {
     httpOnly: true,
     sameSite: 'lax'
