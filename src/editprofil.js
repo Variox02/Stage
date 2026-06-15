@@ -12,7 +12,7 @@ const router = express.Router()
 // -----------------------------------------------------------
 // Route protégée : récupération des informations du profil
 // -----------------------------------------------------------
-router.get('https://stageback.onrender.com/api/getUser', async (req, res) => {
+router.get('https://stage.onrender.com/api/getUser', async (req, res) => {
     // Le token d'authentification est stocké dans le cookie 'token'.
     const token = req.cookies.token
     if (!token) {
@@ -45,7 +45,7 @@ router.get('https://stageback.onrender.com/api/getUser', async (req, res) => {
 // -----------------------------------------------------------
 // Route protégée : modification du mot de passe utilisateur
 // -----------------------------------------------------------
-router.put('https://stageback.onrender.com/api/updatePassword', async (req, res) => {
+router.put('https://stage.onrender.com/api/updatePassword', async (req, res) => {
     const token = req.cookies.token
     if (!token) {
         return res.status(401).json({ error: 'Non connecté' })
@@ -89,7 +89,7 @@ router.put('https://stageback.onrender.com/api/updatePassword', async (req, res)
 // -----------------------------------------------------------
 // Route protégée : mise à jour des informations utilisateur
 // -----------------------------------------------------------
-router.put('https://stageback.onrender.com/api/updateUser', async (req, res) => {
+router.put('https://stage.onrender.com/api/updateUser', async (req, res) => {
     const token = req.cookies.token
 
     if (!token) {
@@ -143,7 +143,7 @@ router.put('https://stageback.onrender.com/api/updateUser', async (req, res) => 
 // -----------------------------------------------------------
 // Route protégée : récupération des commandes passées par l'utilisateur
 // -----------------------------------------------------------
-router.get('https://stageback.onrender.com/api/getCommandes', async (req, res) => {
+router.get('https://stage.onrender.com/api/getCommandes', async (req, res) => {
     const token = req.cookies.token
     if (!token) {
         return res.status(401).json({ error: 'Non connecté' })
