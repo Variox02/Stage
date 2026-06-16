@@ -118,7 +118,7 @@ app.post('/api/connexion', async (req, res) => {
 
     // Génère un token JWT avec l'ID utilisateur.
     const token = jwt.sign(
-      { id: user.id },
+      { id: user.id, isadmin: user.isadmin, isdelivery: user.isdelivery },
       process.env.JWT_SECRET,
       { expiresIn: '24h' }
     )
