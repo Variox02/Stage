@@ -107,6 +107,7 @@
                                 <th class="text-center" style="width:100px;">Prix</th>
                                 <th class="text-center" style="width:120px;">Stock</th>
                                 <th class="text-center" style="width:160px;">Modifier stock</th>
+                                <th class="text-center" style="width:120px;">Modifier</th>
                             </tr>
                         </thead>
                         <tbody id="stock-tbody">
@@ -130,5 +131,34 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../js/admin-stock.js"></script>
 
+    // Modal pour modifier un produit
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">✏️ Modifier le produit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="field-group mb-3">
+                        <label class="field-label">Nom</label>
+                        <input type="text" class="admin-search w-100" id="edit-name" />
+                    </div>
+                    <div class="field-group mb-3">
+                        <label class="field-label">Description</label>
+                        <textarea class="admin-search w-100" id="edit-description" rows="3" style="border-radius:1rem; resize:none;"></textarea>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Prix (€)</label>
+                        <input type="number" class="admin-search w-100" id="edit-price" step="0.01" min="0" />
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button class="btn btn-outline-danger" id="btn-delete-product">🗑️ Supprimer</button>
+                    <button class="btn btn-rouge" id="btn-save-product">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

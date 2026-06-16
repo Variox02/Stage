@@ -239,3 +239,23 @@
     font-size: .95rem;
     color: var(--texte);
 }
+
+/* CSS de la modal de bouton modifier un produit */
+.admin-btn-edit {
+    background: var(--beige);
+    color: var(--texte);
+    border: 1.5px solid var(--beige-dark);
+    border-radius: 2rem;
+    padding: .35rem .9rem;
+    font-size: .78rem;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background .15s;
+}
+
+.admin-btn-edit:hover {
+    background: var(--brun);
+    color: #fff;
+    border-color: var(--brun);
+}
