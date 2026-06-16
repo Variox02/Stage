@@ -107,86 +107,10 @@
                                 <th class="text-center" style="width:100px;">Prix</th>
                                 <th class="text-center" style="width:120px;">Stock</th>
                                 <th class="text-center" style="width:160px;">Modifier stock</th>
-                                <th class="text-center" style="width:100px;">Actions</th>
                             </tr>
                         </thead>
                         <tbody id="stock-tbody">
-                            <!-- Ligne exemple statique pour aperçu visuel avant JS -->
-                            <tr>
-                                <td class="text-center fs-4">🍅</td>
-                                <td>
-                                    <span class="admin-product-name">Margherita</span>
-                                </td>
-                                <td>
-                                    <span class="admin-product-desc">Tomate, mozzarella, basilic frais.</span>
-                                </td>
-                                <td class="text-center">
-                                    <span class="admin-price">12.00 €</span>
-                                </td>
-                                <td class="text-center">
-                                    <span class="admin-stock-badge admin-stock-ok">8</span>
-                                </td>
-                                <td class="text-center">
-                                    <div class="admin-qty-wrap">
-                                        <button class="admin-qty-btn">−</button>
-                                        <input class="admin-qty-input" type="number" value="8" min="0" />
-                                        <button class="admin-qty-btn">+</button>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <button class="admin-btn-save">Enregistrer</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center fs-4">🌶️</td>
-                                <td>
-                                    <span class="admin-product-name">Piment</span>
-                                </td>
-                                <td>
-                                    <span class="admin-product-desc">Tomate épicée, chorizo, piment jalapeño.</span>
-                                </td>
-                                <td class="text-center">
-                                    <span class="admin-price">13.00 €</span>
-                                </td>
-                                <td class="text-center">
-                                    <span class="admin-stock-badge admin-stock-low">2</span>
-                                </td>
-                                <td class="text-center">
-                                    <div class="admin-qty-wrap">
-                                        <button class="admin-qty-btn">−</button>
-                                        <input class="admin-qty-input" type="number" value="2" min="0" />
-                                        <button class="admin-qty-btn">+</button>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <button class="admin-btn-save">Enregistrer</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center fs-4">🥦</td>
-                                <td>
-                                    <span class="admin-product-name">Veggie</span>
-                                </td>
-                                <td>
-                                    <span class="admin-product-desc">Courgette, poivron, aubergine, chèvre.</span>
-                                </td>
-                                <td class="text-center">
-                                    <span class="admin-price">12.00 €</span>
-                                </td>
-                                <td class="text-center">
-                                    <span class="admin-stock-badge admin-stock-rupture">0</span>
-                                </td>
-                                <td class="text-center">
-                                    <div class="admin-qty-wrap">
-                                        <button class="admin-qty-btn">−</button>
-                                        <input class="admin-qty-input" type="number" value="0" min="0" />
-                                        <button class="admin-qty-btn">+</button>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <button class="admin-btn-save">Enregistrer</button>
-                                </td>
-                            </tr>
+                            <!-- Les lignes seront remplies dynamiquement par le script admin-stock.js -->
                         </tbody>
                     </table>
                 </div>

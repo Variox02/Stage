@@ -1,24 +1,7 @@
 // Script de la page d'accueil (index.html)
 import { checkAuth } from './e-navbar.js'
 import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
-
-// Retourne l'emoji correspondant au nom de la pizza
-// Utilisé pour l'affichage dans le bandeau défilant et les cartes
-function getEmojiForPizza(name) {
-  const n = name.toLowerCase()
-
-  if (n.includes('fromage')) return '🧀'
-  if (n.includes('marg')) return '🍅'
-  if (n.includes('piment')) return '🌶️'
-  if (n.includes('champ')) return '🍄'
-  if (n.includes('reine')) return '👑'
-  if (n.includes('bbq')) return '🔥'
-  if (n.includes('veggie')) return '🥦'
-  if (n.includes('thon')) return '🐟'
-  if (n.includes('calzone')) return '🥟'
-  if (n.includes('bolognaise')) return '🍝'
-  return '🍕' 
-}
+import { getEmojiForPizza } from './e-utils.js'
 
 // Charge les produits et remplit le bandeau défilant avec les noms de pizzas
 // Affiche chaque pizza deux fois pour un effet de défilement continu

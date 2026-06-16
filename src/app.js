@@ -33,6 +33,8 @@ import editProfilRouter from './editprofil.js'
 
 // Montage du routeur de profil sur l'application.
 app.use(editProfilRouter)
+//Routeur de la partie admin
+app.use(adminRouter)
 
 // -----------------------------------------------------------
 // Route publique : liste des produits disponibles en stock
