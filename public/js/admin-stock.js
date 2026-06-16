@@ -7,15 +7,15 @@ async function printProducts(){
             throw new Error('Erreur lors de la récupération des produits')
         }
         const products = await response.json()
-        const div = document.getElementById('stock-tbody')
+        const tbody = document.getElementById('stock-tbody')
 
         products.forEach(p => {
             const stock = parseInt(p.stock)
             let badgeClass = 'admin-stock-ok'
             if (stock === 0) {
                 badgeClass = 'admin-stock-rupture'
-            }else {
-                if (stock <= 3) badgeClass = 'admin-stock-low'
+            } else if (stock <= 3) {
+                badgeClass = 'admin-stock-low'
             }
 
             const tr = document.createElement('tr')
@@ -35,11 +35,12 @@ async function printProducts(){
             `
             tbody.appendChild(tr)
         })
+
         document.querySelectorAll('.admin-qty-btn').forEach(btn => {
             btn.addEventListener('click', async () => {
                 const id = btn.dataset.id
                 const display = document.getElementById(`input-${id}`)
-                const newVal = Math.max(0, parseInt(display.textContent) + parseInt(btn.dataset.delta))
+                const newVal = Math.max(0, parseInt(display.value) + parseInt(btn.dataset.delta))
 
                 try {
                     const res = await fetch(`https://stage-ydwe.onrender.com/api/products/${id}/stock`, {
@@ -49,12 +50,9 @@ async function printProducts(){
                         body: JSON.stringify({ stock: newVal })
                     })
 
-                    if (!res.ok) {
-                        throw new Error()
-                    }
+                    if (!res.ok) throw new Error()
 
-                    // Mettre à jour l'affichage et le badge
-                    display.textContent = newVal
+                    display.value = newVal
                     const badge = document.getElementById(`badge-${id}`)
                     badge.textContent = newVal
                     badge.className = 'admin-stock-badge'
@@ -65,12 +63,16 @@ async function printProducts(){
                 } catch {
                     alert('Erreur lors de la mise à jour du stock')
                 }
+            })
         })
-    })
 
-    }
-    catch (error) {
+    } catch (error) {
         console.error(error)
+        document.getElementById('stock-spinner').classList.add('d-none')
+        const err = document.getElementById('stock-error')
+        err.textContent = 'Impossible de charger les produits.'
+        err.classList.remove('d-none')
     }
 }
+
 printProducts()
