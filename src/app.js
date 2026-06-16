@@ -30,6 +30,7 @@ app.use(cookieParser())
 
 // Import du routeur dédié aux actions liées au profil utilisateur.
 import editProfilRouter from './editprofil.js'
+import adminRouter from './admin.js'
 
 // Montage du routeur de profil sur l'application.
 app.use(editProfilRouter)
