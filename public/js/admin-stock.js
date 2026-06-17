@@ -78,7 +78,7 @@ async function printProducts(){
 
             try {
                 // Envoyer une requête PUT pour mettre à jour le produit
-                const res = await fetch(`https://stage-ydwe.onrender.com/api/products/${currentEditId}`, {
+                const res = await fetch(`https://stage-ydwe.onrender.com/api/editProducts/${currentEditId}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
@@ -103,7 +103,7 @@ async function printProducts(){
 
             try {
                 // Envoyer une requête DELETE pour supprimer le produit
-                const res = await fetch(`https://stage-ydwe.onrender.com/api/products/${currentEditId}`, {
+                const res = await fetch(`https://stage-ydwe.onrender.com/api/deleteProducts/${currentEditId}`, {
                     method: 'DELETE',
                     credentials: 'include'
                 })

@@ -50,7 +50,7 @@ router.put('/api/products/:id/stock', async (req, res) => {
  * Met à jour les informations d'un produit (nom, description, prix)
  * Nécessite un token JWT valide d'administrateur
  */
-router.put('/api/products/:id', async (req, res) => {
+router.put('/api/editProducts/:id', async (req, res) => {
     console.log('body reçu:', req.body)
     // Récupérer et vérifier le token JWT
     const token = req.cookies.token
@@ -85,7 +85,7 @@ router.put('/api/products/:id', async (req, res) => {
  * Supprime un produit de la base de données
  * Nécessite un token JWT valide d'administrateur
  */
-router.delete('/api/products/:id', async (req, res) => {
+router.delete('/api/deleteProducts/:id', async (req, res) => {
     // Récupérer et vérifier le token JWT
     const token = req.cookies.token
     if (!token) return res.status(401).json({ error: 'Non connecté' })
