@@ -14,6 +14,7 @@ async function printProducts(){
         }
         const products = await response.json()
         const tbody = document.getElementById('stock-tbody')
+        tbody.innerHTML = ''
         // Masquer le spinner de chargement
         document.getElementById('stock-spinner').classList.add('d-none')
 

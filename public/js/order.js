@@ -1,4 +1,5 @@
 import { checkAuth } from './e-navbar.js'
+import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
 import { getEmojiForPizza } from './e-utils.js'
 
 function loadOrderItems() {

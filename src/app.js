@@ -28,10 +28,13 @@ app.use(express.static('public'))
 // Lecture des cookies sur les requêtes entrantes.
 app.use(cookieParser())
 
-// Import du routeur dédié aux actions liées au profil utilisateur.
+// Import des routeurs.
 import editProfilRouter from './editprofil.js'
 import adminRouter from './admin.js'
+import orderRouter from './order.js'
 
+// Montage du routeur de commande sur l'application.
+app.use(orderRouter)
 // Montage du routeur de profil sur l'application.
 app.use(editProfilRouter)
 //Routeur de la partie admin
