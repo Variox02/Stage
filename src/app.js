@@ -31,7 +31,7 @@ app.use(cookieParser())
 // Import des routeurs.
 import editProfilRouter from './editprofil.js'
 import adminRouter from './admin.js'
-import orderRouter from './order.js'
+import orderRouter from './validorder.js'
 
 // Montage du routeur de commande sur l'application.
 app.use(orderRouter)
