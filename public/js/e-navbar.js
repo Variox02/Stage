@@ -1,6 +1,6 @@
 // Module de gestion de la barre de navigation
 // Génère dynamiquement la navbar en fonction de l'authentification de l'utilisateur
-import { getUser } from './e-checkcookie.js'
+import { getUser, isadmin } from './e-checkcookie.js'
 
 // Vérifie l'authentification et affiche la navbar appropriée
 // Affiche soit la navbar "Invité", soit la navbar "Utilisateur connecté"
@@ -51,7 +51,7 @@ export function renderNavbarUser(user) {
         <ul class="dropdown-menu dropdown-menu-end" data-bs-display="static">
             <li><a class="dropdown-item" href="profil.html">Mon profil</a></li>
             <li><a class="dropdown-item" href="commandes.html">Mes commandes</a></li>
-            ${user.isadmin ? '<li><a class="dropdown-item text-danger" href="admin/index.html">Administration</a></li>' : ''}
+            ${user.isadmin ? '<li><a class="dropdown-item text-danger" href="admin/admin.html">Administration</a></li>' : ''}
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#" id="btn-deconnexion">Déconnexion</a></li>
         </ul>
