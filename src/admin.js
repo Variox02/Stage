@@ -51,7 +51,9 @@ router.put('/api/products/:id/stock', async (req, res) => {
  * Nécessite un token JWT valide d'administrateur
  */
 router.put('/api/editProducts/:id', async (req, res) => {
+
     console.log('body reçu:', req.body)
+
     // Récupérer et vérifier le token JWT
     const token = req.cookies.token
     if (!token) return res.status(401).json({ error: 'Non connecté' })
@@ -65,11 +67,15 @@ router.put('/api/editProducts/:id', async (req, res) => {
         const { id } = req.params
         const { name, description, price } = req.body
 
+    console.log('name:', name, 'description:', description, 'price:', price)
+
         // Mettre à jour les informations du produit dans la base de données
         await pool.query(
             'UPDATE product SET name = $1, description = $2, price = $3 WHERE id = $4',
             [name, description, price, id]
         )
+        
+        console.log('rowCount:', result.rowCount)
 
         res.json({ success: true })
 
