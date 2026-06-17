@@ -180,6 +180,7 @@ async function printProducts(){
 
 // Lancer la fonction au chargement de la page
 printProducts()
+document.getElementById('btn-add-product').addEventListener('click', addProduct)
 
 function updateStats() {
     const badges = document.querySelectorAll('.admin-stock-badge')
@@ -197,4 +198,28 @@ function updateStats() {
     document.getElementById('stat-dispo').textContent = dispo
     document.getElementById('stat-low').textContent = low
     document.getElementById('stat-rupture').textContent = rupture
+}
+
+
+async function addProduct() {
+    try {
+        const name = document.getElementById('add-name').value
+        const description = document.getElementById('add-description').value
+        const price = document.getElementById('add-price').value
+        const stock = document.getElementById('add-stock').value
+
+        // Envoyer une requête POST pour ajouter un nouveau produit
+        const res = await fetch('https://stage-ydwe.onrender.com/api/addProducts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ name, description, price, stock })
+        })
+        if (!res.ok) throw new Error()
+        // Fermer la modal et rafraîchir le tableau
+        bootstrap.Modal.getInstance(document.getElementById('addProductModal')).hide()
+        printProducts()
+    } catch {
+        alert('Erreur lors de l\'ajout du produit')
+    }
 }

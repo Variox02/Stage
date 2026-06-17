@@ -40,7 +40,7 @@
                     <h2 class="display-5 mb-0">Gestion des stocks</h2>
                 </div>
                 <div class="d-flex gap-2">
-                    <button class="btn btn-rouge px-4">+ Ajouter un produit</button>
+                    <button class="btn btn-rouge px-4" data-bs-toggle="modal" data-bs-target="#addProductModal">+ Ajouter un produit</button>
                 </div>
             </div>
 
@@ -156,6 +156,38 @@
                 <div class="modal-footer justify-content-between">
                     <button class="btn btn-outline-danger" id="btn-delete-product">🗑️ Supprimer</button>
                     <button class="btn btn-rouge" id="btn-save-product">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal pour ajouter un produit -->
+    <div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">➕ Ajouter un produit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="field-group mb-3">
+                        <label class="field-label">Nom</label>
+                        <input type="text" class="admin-search w-100" id="add-name" placeholder="Ex : Margherita" />
+                    </div>
+                    <div class="field-group mb-3">
+                        <label class="field-label">Description</label>
+                        <textarea class="admin-search w-100" id="add-description" rows="3" style="border-radius:1rem; resize:none;" placeholder="Une courte description..."></textarea>
+                    </div>
+                    <div class="field-group mb-3">
+                        <label class="field-label">Prix (€)</label>
+                        <input type="number" class="admin-search w-100" id="add-price" step="0.01" min="0" placeholder="0.00" />
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Stock initial</label>
+                        <input type="number" class="admin-search w-100" id="add-stock" min="0" placeholder="0" />
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-end">
+                    <button class="btn btn-rouge" id="btn-add-product">➕ Ajouter</button>
                 </div>
             </div>
         </div>

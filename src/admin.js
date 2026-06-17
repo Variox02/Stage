@@ -114,5 +114,33 @@ router.delete('/api/deleteProducts/:id', async (req, res) => {
     }
 })
 
+router.post('/api/addProducts', async (req, res) => {
+    // Récupérer et vérifier le token JWT
+    const token = req.cookies.token
+    if (!token) return res.status(401).json({ error: 'Non connecté' })
+
+    try {
+        // Vérifier la validité du token et les droits admin
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        if (!decoded.isadmin) return res.status(403).json({ error: 'Accès refusé' })
+
+        // Récupérer les informations du nouveau produit
+        const { name, description, price, stock } = req.body
+
+        // Insérer le nouveau produit dans la base de données
+        await pool.query(
+            'INSERT INTO product (name, description, price, stock) VALUES ($1, $2, $3, $4)',
+            [name, description, price, stock]
+        )
+
+        res.json({ success: true })
+
+    } catch (err) {
+        // Erreur lors de la vérification du token
+        console.error(err)
+        return res.status(401).json({ error: 'Token invalide' })
+    }
+})
+
 // Exporter le routeur pour l'utiliser dans l'application principale
 export default router
