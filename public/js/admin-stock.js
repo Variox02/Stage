@@ -5,6 +5,7 @@ import { getEmojiForPizza } from './e-utils.js'
  * Cette fonction récupère les produits depuis l'API et les affiche dans un tableau
  * Elle gère également l'édition, la suppression et la mise à jour du stock
  */
+let currentEditId = null
 async function printProducts(){
     try {
         // Récupération des produits depuis l'API
@@ -55,8 +56,6 @@ async function printProducts(){
             tbody.appendChild(tr)
         })
         
-        // Variable pour stocker l'ID du produit en cours de modification
-        let currentEditId = null
 
         // Gestionnaire de clic pour les boutons "Modifier"
         // Remplit le formulaire modal avec les données du produit sélectionné
@@ -67,58 +66,12 @@ async function printProducts(){
                 document.getElementById('edit-description').value = btn.dataset.description
                 document.getElementById('edit-price').value = parseFloat(btn.dataset.price).toFixed(2)
 
-                new bootstrap.Modal(document.getElementById('editProductModal')).show()
+                const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('editProductModal'))
+                modal.show()
             })
         })
 
-        // Gestionnaire pour sauvegarder les modifications du produit
-        document.getElementById('btn-save-product').addEventListener('click', async () => {
-            const name = document.getElementById('edit-name').value
-            const description = document.getElementById('edit-description').value
-            const price = document.getElementById('edit-price').value
 
-            try {
-                // Envoyer une requête PUT pour mettre à jour le produit
-                const res = await fetch(`https://stage-ydwe.onrender.com/api/editProducts/${currentEditId}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
-                    body: JSON.stringify({ name, description, price })
-                })
-
-                if (!res.ok) throw new Error()
-
-                // Fermer la modal et rafraîchir le tableau
-                bootstrap.Modal.getInstance(document.getElementById('editProductModal')).hide()
-                printProducts()  // recharge le tableau
-
-            } catch {
-                alert('Erreur lors de la modification du produit')
-            }
-        })
-
-        // Gestionnaire pour supprimer un produit
-        document.getElementById('btn-delete-product').addEventListener('click', async () => {
-            // Demander une confirmation avant de supprimer
-            if (!confirm('Supprimer ce produit définitivement ?')) return
-
-            try {
-                // Envoyer une requête DELETE pour supprimer le produit
-                const res = await fetch(`https://stage-ydwe.onrender.com/api/deleteProducts/${currentEditId}`, {
-                    method: 'DELETE',
-                    credentials: 'include'
-                })
-
-                if (!res.ok) throw new Error()
-
-                // Fermer la modal et rafraîchir le tableau
-                bootstrap.Modal.getInstance(document.getElementById('editProductModal')).hide()
-                printProducts()
-
-            } catch {
-                alert('Erreur lors de la suppression du produit')
-            }
-        })
         
         // ========== CALCUL DES STATISTIQUES DE STOCK ==========
         const total = products.length  // Nombre total de produits
@@ -178,8 +131,58 @@ async function printProducts(){
     }
 }
 
+// Gestionnaire pour sauvegarder les modifications du produit
+document.getElementById('btn-save-product').addEventListener('click', async () => {
+    const name = document.getElementById('edit-name').value
+    const description = document.getElementById('edit-description').value
+    const price = document.getElementById('edit-price').value
+
+    try {
+        // Envoyer une requête PUT pour mettre à jour le produit
+        const res = await fetch(`https://stage-ydwe.onrender.com/api/editProducts/${currentEditId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+                body: JSON.stringify({ name, description, price })
+            })
+
+            if (!res.ok) throw new Error()
+
+        // Fermer la modal et rafraîchir le tableau
+        bootstrap.Modal.getInstance(document.getElementById('editProductModal')).hide()
+        printProducts()  // recharge le tableau
+
+    } catch {
+        alert('Erreur lors de la modification du produit')
+    }
+})
+
+// Gestionnaire pour supprimer un produit
+document.getElementById('btn-delete-product').addEventListener('click', async () => {
+    // Demander une confirmation avant de supprimer
+    if (!confirm('Supprimer ce produit définitivement ?')) return
+
+    try {
+        // Envoyer une requête DELETE pour supprimer le produit
+        const res = await fetch(`https://stage-ydwe.onrender.com/api/deleteProducts/${currentEditId}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        })
+
+        if (!res.ok) throw new Error()
+
+        // Fermer la modal et rafraîchir le tableau
+        bootstrap.Modal.getInstance(document.getElementById('editProductModal')).hide()
+        printProducts()
+
+    } catch {
+        alert('Erreur lors de la suppression du produit')
+    }
+})
+
 // Lancer la fonction au chargement de la page
 printProducts()
+
 document.getElementById('btn-add-product').addEventListener('click', addProduct)
 
 function updateStats() {
