@@ -175,7 +175,7 @@ async function printProducts(){
         err.textContent = 'Impossible de charger les produits.'
         err.classList.remove('d-none')
     }
-    printproducts() 
+    printProducts() 
 }
 
 // Lancer la fonction au chargement de la page

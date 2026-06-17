@@ -14,7 +14,7 @@ const app = express()
 // `origin: 'true'` est utilisé pour accepter les origines du navigateur
 // lorsque `credentials: true` est activé. Cela permet d'envoyer le cookie JWT.
 app.use(cors({
-  origin: 'true',
+  origin: true,
   credentials: true
 }))
 
