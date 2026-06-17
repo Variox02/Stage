@@ -70,5 +70,8 @@ document.querySelectorAll('input[name="order-mode"]').forEach(delivery => {
     })
 })
 
-document.addEventListener('DOMContentLoaded', checkAuth)
+document.addEventListener('DOMContentLoaded', () =>{
+    checkAuth()
+    renderCart()
+})
 
