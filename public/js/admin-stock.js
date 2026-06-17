@@ -159,6 +159,7 @@ async function printProducts(){
                     if (newVal === 0) badge.classList.add('admin-stock-rupture')
                     else if (newVal <= 3) badge.classList.add('admin-stock-low')
                     else badge.classList.add('admin-stock-ok')
+                    updateStats()  
 
                 } catch {
                     alert('Erreur lors de la mise à jour du stock')
@@ -174,7 +175,26 @@ async function printProducts(){
         err.textContent = 'Impossible de charger les produits.'
         err.classList.remove('d-none')
     }
+    printproducts() 
 }
 
 // Lancer la fonction au chargement de la page
 printProducts()
+
+function updateStats() {
+    const badges = document.querySelectorAll('.admin-stock-badge')
+    let total = badges.length
+    let dispo = 0, low = 0, rupture = 0
+
+    badges.forEach(badge => {
+        const val = parseInt(badge.textContent)
+        if (val === 0) rupture++
+        else if (val <= 3) low++
+        else dispo++
+    })
+
+    document.getElementById('stat-total').textContent = total
+    document.getElementById('stat-dispo').textContent = dispo
+    document.getElementById('stat-low').textContent = low
+    document.getElementById('stat-rupture').textContent = rupture
+}

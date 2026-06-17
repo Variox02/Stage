@@ -51,6 +51,7 @@ router.put('/api/products/:id/stock', async (req, res) => {
  * Nécessite un token JWT valide d'administrateur
  */
 router.put('/api/products/:id', async (req, res) => {
+    console.log('body reçu:', req.body)
     // Récupérer et vérifier le token JWT
     const token = req.cookies.token
     if (!token) return res.status(401).json({ error: 'Non connecté' })
