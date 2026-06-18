@@ -32,7 +32,11 @@ app.use(cookieParser())
 import editProfilRouter from './editprofil.js'
 import adminRouter from './admin.js'
 import orderRouter from './validorder.js'
+import paymentRouter from './payment.js'
 
+
+// Montage du routeur de paiement sur l'application.
+app.use(paymentRouter)
 // Montage du routeur de commande sur l'application.
 app.use(orderRouter)
 // Montage du routeur de profil sur l'application.

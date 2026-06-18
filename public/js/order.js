@@ -94,9 +94,15 @@ document.querySelector('#btn-pay').addEventListener('click', async () => {
 
         if (!res.ok) throw new Error()
 
-        // Vider le panier et rediriger vers une page de confirmation
-        localStorage.removeItem('cart')
-        window.location.href = 'success.html'
+        // Créer la session Stripe
+        const stripeRes = await fetch('https://stage-ydwe.onrender.com/api/create-checkout-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ items: cart, deliveryCost })
+        })
+        const data = await stripeRes.json()
+        if (!stripeRes.ok) throw new Error(data.error)
 
     } catch (err) {
         console.error(err)
