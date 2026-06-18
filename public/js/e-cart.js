@@ -118,22 +118,22 @@ export function renderCart() {
     container.querySelectorAll('.remove-btn').forEach(btn => {
         btn.addEventListener('click', () => removeFromCart(btn.dataset.id))
     })
-    
-    // Gestion du bouton Commander
-    const checkoutBtn = document.getElementById('cart-checkout-btn')
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', async (e) => {
-            e.preventDefault()
 
-            const { getUser } = await import('./e-checkcookie.js')
-            const user = await getUser()
+}
 
-            if (!user) {
-                window.location.href = 'connexion.html'
-                return
-            }
+//Bouton de check si connecté pour rediriger vers la page de commande ou de connexion
+export async function initCheckoutBtn() {
+    document.getElementById('cart-checkout-btn')?.addEventListener('click', async (e) => {
+        e.preventDefault()
 
-            window.location.href = 'order.html'
-        })
-    }
+        const { getUser } = await import('./e-checkcookie.js')
+        const user = await getUser()
+
+        if (!user) {
+            window.location.href = 'connexion.html'
+            return
+        }
+
+        window.location.href = 'order.html'
+    })
 }

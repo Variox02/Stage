@@ -1,6 +1,6 @@
 // Script de la page menu.html
 import { checkAuth } from './e-navbar.js'
-import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
+import { addToCart, updateCartBadge, renderCart, CheckoutBtn } from './e-cart.js'
 import { getEmojiForPizza } from './e-utils.js'
 
 
@@ -71,4 +71,5 @@ document.addEventListener('DOMContentLoaded', () => {
     checkAuth()
     updateCartBadge()
     renderCart()  
+    CheckoutBtn()
 })

@@ -1,5 +1,5 @@
 // Page connexion.html
-import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
+import { addToCart, updateCartBadge, renderCart, CheckoutBtn } from './e-cart.js'
 
 //fonction basique d'erreur
 function showError(fieldId, message) {
@@ -85,5 +85,6 @@ document.getElementById('form-connexion').addEventListener('submit', async (e) =
 
 document.addEventListener('DOMContentLoaded', () => {
     updateCartBadge()
-    renderCart()  
+    renderCart() 
+    CheckoutBtn()
 })

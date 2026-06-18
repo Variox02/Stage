@@ -1,6 +1,6 @@
 // Script de la page profil.html
 import { checkAuth } from './e-navbar.js'
-import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
+import { addToCart, updateCartBadge, renderCart, CheckoutBtn } from './e-cart.js'
 
 let currentUser = null
 
@@ -201,4 +201,5 @@ loadCommandes()
 document.addEventListener('DOMContentLoaded', () => { 
     updateCartBadge(), 
     renderCart() 
+    CheckoutBtn()
 })

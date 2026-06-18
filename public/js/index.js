@@ -1,6 +1,6 @@
 // Script de la page d'accueil (index.html)
 import { checkAuth } from './e-navbar.js'
-import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
+import { addToCart, updateCartBadge, renderCart, CheckoutBtn } from './e-cart.js'
 import { getEmojiForPizza } from './e-utils.js'
 
 // Charge les produits et remplit le bandeau défilant avec les noms de pizzas
@@ -93,4 +93,5 @@ loadMenu()
 document.addEventListener('DOMContentLoaded', () => {
   checkAuth(), 
   updateCartBadge(), 
-  renderCart() })
+  renderCart() 
+  CheckoutBtn()})

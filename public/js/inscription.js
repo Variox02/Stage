@@ -1,5 +1,5 @@
 // Script de la page d'inscription
-import { addToCart, updateCartBadge, renderCart } from './e-cart.js'
+import { addToCart, updateCartBadge, renderCart, CheckoutBtn } from './e-cart.js'
 
 // Affiche un message d'erreur sous un champ de formulaire
 function showError(fieldId, message) {
@@ -221,5 +221,6 @@ document.getElementById('form-inscription').addEventListener('submit', async (e)
 // Initialise le panier au chargement de la page
 document.addEventListener('DOMContentLoaded', () => { 
     updateCartBadge(), 
-    renderCart() 
+    renderCart() ,
+    CheckoutBtn()
 })
