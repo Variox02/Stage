@@ -70,6 +70,47 @@ document.querySelectorAll('input[name="order-mode"]').forEach(delivery => {
     })
 })
 
+document.querySelector('#btn-pay').addEventListener('click', async () => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || []
+    if (!cart.length) {
+        alert('Votre panier est vide.')
+        return
+    }
+
+    const isDelivery = document.querySelector('input[name="order-mode"]:checked').value === 'livraison'
+    const deliveryCost = isDelivery ? 2.50 : 0
+
+    document.getElementById('btn-pay').disabled = true
+    document.getElementById('btn-pay-label').textContent = 'Traitement...'
+
+    try {
+        const res = await fetch('https://stage-ydwe.onrender.com/api/commande', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ items: cart, deliveryCost, delivery: isDelivery })
+        })
+
+        if (!res.ok) throw new Error()
+
+        // Vider le panier et rediriger vers une page de confirmation
+        localStorage.removeItem('cart')
+        window.location.href = 'success.html'
+
+    } catch (err) {
+        console.error(err)
+        document.getElementById('order-error').textContent = 'Erreur lors de la commande.'
+        document.getElementById('order-error').classList.remove('d-none')
+        document.getElementById('btn-pay').disabled = false
+        document.getElementById('btn-pay-label').textContent = 'Confirmer la commande'
+    }
+})
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', () =>{
     checkAuth()
     renderCart()
