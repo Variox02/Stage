@@ -103,6 +103,8 @@ document.querySelector('#btn-pay').addEventListener('click', async () => {
         })
         const data = await stripeRes.json()
         if (!stripeRes.ok) throw new Error(data.error)
+        
+        window.location.href = data.url
 
     } catch (err) {
         console.error(err)
