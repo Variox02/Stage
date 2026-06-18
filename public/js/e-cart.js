@@ -122,7 +122,7 @@ export function renderCart() {
 }
 
 //Bouton de check si connecté pour rediriger vers la page de commande ou de connexion
-export async function initCheckoutBtn() {
+export async function CheckoutBtn() {
     document.getElementById('cart-checkout-btn')?.addEventListener('click', async (e) => {
         e.preventDefault()
 

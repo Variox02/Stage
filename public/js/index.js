@@ -93,5 +93,6 @@ loadMenu()
 document.addEventListener('DOMContentLoaded', () => {
   checkAuth(), 
   updateCartBadge(), 
-  renderCart() 
-  CheckoutBtn()})
+  renderCart(),
+  CheckoutBtn()
+})
