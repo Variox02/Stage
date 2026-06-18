@@ -11,6 +11,7 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.3",
     "pg": "^8.21.0",
-    "postgres": "^3.4.9"
+    "postgres": "^3.4.9",
+    "stripe": "^22.2.1"
   }
 }
