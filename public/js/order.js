@@ -1,5 +1,6 @@
 import { checkAuth } from './e-navbar.js'
 import { addToCart, updateCartBadge, renderCart, CheckoutBtn } from './e-cart.js'
+import { getUser } from './e-checkcookie.js'
 import { getEmojiForPizza } from './e-utils.js'
 
 function loadOrderItems() {
@@ -106,6 +107,15 @@ document.querySelector('#btn-pay').addEventListener('click', async () => {
     }
 })
 
+async function checkProfil() {
+    const res = await getUser()
+    const addressField = document.getElementById('order-address-display')
+    if (res && res.address) {
+        addressField.textContent = res.address
+    } else {
+        addressField.textContent = 'Adresse non renseignée. Veuillez mettre à jour votre profil.'
+    }
+}
 
 
 
@@ -114,5 +124,6 @@ document.querySelector('#btn-pay').addEventListener('click', async () => {
 document.addEventListener('DOMContentLoaded', () =>{
     checkAuth()
     renderCart()
+    checkProfil()
 })
 

@@ -154,7 +154,7 @@ app.get('/api/me', async (req, res) => {
 
     // Récupère les informations utilisateur de base.
     const result = await pool.query(
-      'SELECT id, first_name, email, isadmin, isdelivery FROM utilisateur WHERE id = $1',
+      'SELECT id, first_name, email, isadmin, address, isdelivery FROM utilisateur WHERE id = $1',
       [decoded.id]
     )
 
