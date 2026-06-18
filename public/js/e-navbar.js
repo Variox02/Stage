@@ -50,7 +50,7 @@ export function renderNavbarUser(user) {
         </a>
         <ul class="dropdown-menu dropdown-menu-end" data-bs-display="static">
             <li><a class="dropdown-item" href="profil.html">Mon profil</a></li>
-            <li><a class="dropdown-item" href="commandes.html">Mes commandes</a></li>
+            <li><a class="dropdown-item" href="profil.html">Mes commandes</a></li>
             ${user.isadmin ? '<li><a class="dropdown-item text-danger" href="admin/admin.html">Administration</a></li>' : ''}
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#" id="btn-deconnexion">Déconnexion</a></li>
