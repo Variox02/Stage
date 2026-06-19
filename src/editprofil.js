@@ -26,7 +26,7 @@ router.get('/api/getUser', async (req, res) => {
 
         // Récupère les champs du profil qui pourront être affichés côté client.
         const result = await pool.query(
-            'SELECT first_name, name, email, address, country, isadmin, isdelivery, newsletter, create_date FROM utilisateur WHERE id = $1',
+            'SELECT first_name, name, email, address, country, isadmin, isdelivery, newsletter, create_date, telephone FROM utilisateur WHERE id = $1',
             [id]
         )
 
