@@ -29,7 +29,7 @@ async function commandlist() {
                 <div class="admin-card h-100">
                     <h5 class="admin-card-title mb-2">📦 Commande #${d.id_commande}</h5>
                     <p class="admin-product-desc mb-3">${d.delivery_address}</p>
-                    <p class="admin-product-desc mb-3">${new Date(d.create_date).toLocaleString('fr-FR')}</p>
+                    <p class="admin-product-desc mb-3">${new Date(d.date_delivery).toLocaleString('fr-FR')}</p>
                     <button class="btn ${isPris ? 'btn-outline-secondary' : 'btn-rouge'} w-100 btn-view-delivery" data-id="${d.id}" data-id-commande="${d.id_commande}" data-pris="${isPris}">
                         ${isPris ? '🛵 Déjà prise en charge' : 'Voir le détail'}
                     </button>

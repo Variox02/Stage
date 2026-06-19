@@ -39,6 +39,14 @@ router.post('/api/commande', async (req, res) => {
             )
         }
 
+        // 3. Si la commande est pour livraison, créer une entrée dans la table delivery.
+        if (delivery) {
+            await pool.query(
+                'INSERT INTO delivery (id_commande, delivery_address, date_delivery, isdelivered) VALUES ($1, $2, NOW(), false)',
+                [id_commande, address]
+        )
+        }
+
         res.json({ success: true, id_commande })
 
     } catch (err) {

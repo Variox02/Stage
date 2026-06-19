@@ -18,7 +18,7 @@ router.get('/api/deliverylist', async (req, res) => {
     }
 
     try {
-        const result = await pool.query('SELECT id, create_date, id_commande, delivery_address, id_delivery FROM delivery WHERE isdelivered = false ORDER BY id ASC')
+        const result = await pool.query('SELECT id, date_delivery, id_commande, delivery_address, id_delivery FROM delivery WHERE isdelivered = false ORDER BY id ASC')
         res.json(result.rows)
     } catch (err) {
         console.error(err)
