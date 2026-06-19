@@ -124,9 +124,9 @@ async function checkProfil() {
         addressField.textContent = 'Adresse non renseignée. Veuillez mettre à jour votre profil.'
     }
     if (res && res.telephone) {
-        document.getElementById('order-phone-display').textContent = res.telephone
+        document.getElementById('order-phone-display').value = res.telephone
     } else {
-        document.getElementById('order-phone-display').textContent = 'Téléphone non renseigné. Veuillez mettre à jour votre profil.'
+        document.getElementById('order-phone-display').value = 'Téléphone non renseigné. Veuillez mettre à jour votre profil.'
     }
 }
 
