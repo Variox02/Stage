@@ -89,7 +89,7 @@ document.querySelector('#btn-pay').addEventListener('click', async () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
-            body: JSON.stringify({ items: cart, deliveryCost, delivery: isDelivery })
+            body: JSON.stringify({ items: cart, deliveryCost, delivery: isDelivery, address })
         })
 
         if (!res.ok) throw new Error()
