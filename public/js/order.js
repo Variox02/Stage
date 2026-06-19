@@ -123,6 +123,11 @@ async function checkProfil() {
     } else {
         addressField.textContent = 'Adresse non renseignée. Veuillez mettre à jour votre profil.'
     }
+    if (res && res.telephone) {
+        document.getElementById('order-phone-display').textContent = res.telephone
+    } else {
+        document.getElementById('order-phone-display').textContent = 'Téléphone non renseigné. Veuillez mettre à jour votre profil.'
+    }
 }
 
 
