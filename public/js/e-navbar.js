@@ -52,6 +52,7 @@ export function renderNavbarUser(user) {
             <li><a class="dropdown-item" href="profil.html">Mon profil</a></li>
             <li><a class="dropdown-item" href="profil.html">Mes commandes</a></li>
             ${user.isadmin ? '<li><a class="dropdown-item text-danger" href="admin/admin.html">Administration</a></li>' : ''}
+            ${user.isdelivery ? '<li><a class="dropdown-item text-danger" href="delivery/deliverylist.html">Livraison</a></li>' : ''}
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#" id="btn-deconnexion">Déconnexion</a></li>
         </ul>

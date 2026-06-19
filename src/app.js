@@ -81,14 +81,14 @@ app.post('/api/verifMail', async (req, res) => {
 // -----------------------------------------------------------
 app.post('/api/inscription', async (req, res) => {
   try {
-    const { email, password, newsletter, first_name, name, country, birth_date, address } = req.body
+    const { email, password, newsletter, first_name, name, country, birth_date, address, telephone } = req.body
 
     // Hash du mot de passe avant insertion en base.
     const hashedPassword = await bcrypt.hash(password, 10)
 
     await pool.query(
-      'INSERT INTO utilisateur (email, password, newsletter, first_name, name, country, birth_date, address) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
-      [email, hashedPassword, newsletter, first_name, name, country, birth_date, address]
+      'INSERT INTO utilisateur (email, password, newsletter, first_name, name, country, birth_date, address, telephone) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+      [email, hashedPassword, newsletter, first_name, name, country, birth_date, address, telephone]
     )
 
     res.status(201).json({ message: 'Compte créé avec succès !' })

@@ -21,7 +21,8 @@ async function loadUser() {
         document.getElementById('profil-nom').value = user.name
         document.getElementById('profil-email-display').value = user.email
         document.getElementById('profil-country').value = user.country
-        document.getElementById('profil-address').value = user.address 
+        document.getElementById('profil-address').value = user.address
+        document.getElementById('profil-telephone').value = user.telephone
 
         // Affiche le nom et l'email en en-tête
         document.getElementById('profil-name').textContent = user.first_name + ' ' + user.name
@@ -107,7 +108,8 @@ document.getElementById('form-infos').addEventListener('submit', async (e) => {
         email: document.getElementById('profil-email-display').value,
         country: document.getElementById('profil-country').value,
         address: document.getElementById('profil-address').value,
-        newsletter: document.getElementById('pref-newsletter').checked
+        newsletter: document.getElementById('pref-newsletter').checked,
+        telephone: document.getElementById('profil-telephone').value
     }
 
     // Détecte uniquement les champs modifiés
@@ -122,6 +124,12 @@ document.getElementById('form-infos').addEventListener('submit', async (e) => {
     // Vérifie qu'il y a au moins une modification
     if(Object.keys(changes).length === 0){
         alert('Aucune modification détectée')
+        return
+    }
+
+    //check le format du numéro de téléphone
+    if(changes.telephone && !/^0[1-9]\d{8}$/.test(changes.telephone)){
+        alert('Le numéro de téléphone n\'est pas valide')
         return
     }
 

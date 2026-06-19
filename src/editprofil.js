@@ -104,7 +104,7 @@ router.put('/api/updateUser', async (req, res) => {
     }
 
     // Liste des champs autorisés à être modifiés par le client.
-    const allowedFields = ['first_name', 'name', 'email', 'country', 'address', 'newsletter']
+    const allowedFields = ['first_name', 'name', 'email', 'country', 'address', 'newsletter', 'telephone']
     const fields = Object.keys(changes).filter(key => allowedFields.includes(key))
 
     if (fields.length === 0) {
