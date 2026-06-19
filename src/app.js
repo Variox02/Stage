@@ -33,8 +33,10 @@ import editProfilRouter from './editprofil.js'
 import adminRouter from './admin.js'
 import orderRouter from './validorder.js'
 import paymentRouter from './payment.js'
+import deliveryRouter from './delivery.js'
 
-
+// Montage du routeur de livraison sur l'application.
+app.use(deliveryRouter)
 // Montage du routeur de paiement sur l'application.
 app.use(paymentRouter)
 // Montage du routeur de commande sur l'application.
