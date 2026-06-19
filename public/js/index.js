@@ -2,12 +2,13 @@
 import { checkAuth } from './e-navbar.js'
 import { addToCart, updateCartBadge, renderCart, CheckoutBtn } from './e-cart.js'
 import { getEmojiForPizza } from './e-utils.js'
+import { API_URL } from './e-config.js'
 
 // Charge les produits et remplit le bandeau défilant avec les noms de pizzas
 // Affiche chaque pizza deux fois pour un effet de défilement continu
 async function loadProducts() {
   try {
-    const response = await fetch('https://stage-ydwe.onrender.com/api/products')
+    const response = await fetch(`${API_URL}/api/products`)
     const products = await response.json()
 
     const track = document.getElementById('band-track')
@@ -46,7 +47,7 @@ async function loadMenu() {
   const error = document.getElementById('menu-error')
 
   try {
-    const res = await fetch('https://stage-ydwe.onrender.com/api/products')
+    const res = await fetch(`${API_URL}/api/products`)
     const products = await res.json()
 
     spinner.classList.add('d-none')

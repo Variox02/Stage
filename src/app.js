@@ -1,12 +1,13 @@
 // Point d'entrée du serveur Express et routes publiques / d'authentification.
 // Ce fichier configure le middleware global et expose les routes REST pour l'application.
-
+import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import pool from './config/db.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser'
+
 
 const app = express()
 
@@ -135,8 +136,8 @@ app.post('/api/connexion', async (req, res) => {
     // Stocke le token dans un cookie sécurisé côté client.
     res.cookie('token', token, {
       httpOnly: true,
-      secure: true,
-      sameSite: 'none',
+      secure: false,
+      sameSite: 'lax',
       maxAge: 24 * 60 * 60 * 1000
     })
 

@@ -1,13 +1,14 @@
 // Script de la page profil.html
 import { checkAuth } from './e-navbar.js'
 import { addToCart, updateCartBadge, renderCart, CheckoutBtn } from './e-cart.js'
+import { API_URL } from './e-config.js'
 
 let currentUser = null
 
 // Charge et affiche les données de l'utilisateur connecté
 async function loadUser() {
     try {
-        const res = await fetch('https://stage-ydwe.onrender.com/api/getUser', {
+        const res = await fetch(`${API_URL}/api/getUser`, {
             credentials: 'include'
         })
 
@@ -70,7 +71,7 @@ document.getElementById('form-securite').addEventListener('submit', async (e) =>
     }
 
     try{
-        const res = await fetch('https://stage-ydwe.onrender.com/api/updatePassword', {
+        const res = await fetch(`${API_URL}/api/updatePassword`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -134,7 +135,7 @@ document.getElementById('form-infos').addEventListener('submit', async (e) => {
     }
 
     try {
-        const res = await fetch('https://stage-ydwe.onrender.com/api/updateUser', {
+        const res = await fetch(`${API_URL}/api/updateUser`, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
@@ -157,7 +158,7 @@ document.getElementById('form-infos').addEventListener('submit', async (e) => {
 // Charge l'historique des commandes de l'utilisateur
 async function loadCommandes() {
     try {
-        const res = await fetch('https://stage-ydwe.onrender.com/api/getCommandes', {
+        const res = await fetch(`${API_URL}/api/getCommandes`, {
             credentials: 'include'
         })
 

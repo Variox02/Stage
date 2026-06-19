@@ -1,10 +1,11 @@
+import { API_URL } from './e-config.js'
 // Identifiant de la livraison actuellement consultée dans la modal
 let currentDeliveryId = null
 
 // Récupère la liste des livraisons côté serveur et met à jour l'UI
 async function commandlist() {
     try {
-        const response = await fetch('https://stage-ydwe.onrender.com/api/deliverylist', {
+        const response = await fetch(`${API_URL}/api/deliverylist`, {
             method: 'GET',
             credentials: 'include'
         })
@@ -76,7 +77,7 @@ async function commandlist() {
 // Prise en charge d'une livraison : envoie une requête PUT à l'API
 document.getElementById('btn-take-delivery').addEventListener('click', async () => {
     try {
-        const res = await fetch(`https://stage-ydwe.onrender.com/api/deliverylist/${currentDeliveryId}/take`, {
+        const res = await fetch(`${API_URL}/api/deliverylist/${currentDeliveryId}/take`, {
             method: 'PUT',
             credentials: 'include'
         })

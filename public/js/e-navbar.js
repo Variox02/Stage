@@ -1,6 +1,7 @@
 // Module de gestion de la barre de navigation
 // Génère dynamiquement la navbar en fonction de l'authentification de l'utilisateur
 import { getUser, isAdmin } from './e-checkcookie.js'
+import { API_URL } from './e-config.js'
 
 // Vérifie l'authentification et affiche la navbar appropriée
 // Affiche soit la navbar "Invité", soit la navbar "Utilisateur connecté"
@@ -59,7 +60,7 @@ export function renderNavbarUser(user) {
         </div>
     `
     document.getElementById('btn-deconnexion').addEventListener('click', async () => {
-        await fetch('https://stage-ydwe.onrender.com/api/deconnexion', { 
+        await fetch(`${API_URL}/api/deconnexion`, { 
         method: 'POST', 
         credentials: 'include' 
         })

@@ -1,4 +1,5 @@
 import { getEmojiForPizza } from './e-utils.js'
+import { API_URL } from './e-config.js'
 
 /**
  * Fonction principale qui affiche la liste des produits avec les options de gestion du stock
@@ -9,7 +10,7 @@ let currentEditId = null
 async function printProducts(){
     try {
         // Récupération des produits depuis l'API
-        const response = await fetch('https://stage-ydwe.onrender.com/api/products')
+        const response = await fetch(`${API_URL}/api/products`)
         if (!response.ok) {
             throw new Error('Erreur lors de la récupération des produits')
         }
@@ -95,7 +96,7 @@ async function printProducts(){
 
                 try {
                     // Envoyer une requête PUT pour mettre à jour le stock
-                    const res = await fetch(`https://stage-ydwe.onrender.com/api/products/${id}/stock`, {
+                    const res = await fetch(`${API_URL}/api/products/${id}/stock`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         credentials: 'include',
@@ -139,7 +140,7 @@ document.getElementById('btn-save-product').addEventListener('click', async () =
 
     try {
         // Envoyer une requête PUT pour mettre à jour le produit
-        const res = await fetch(`https://stage-ydwe.onrender.com/api/editProducts/${currentEditId}`, {
+        const res = await fetch(`${API_URL}/api/editProducts/${currentEditId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -164,7 +165,7 @@ document.getElementById('btn-delete-product').addEventListener('click', async ()
 
     try {
         // Envoyer une requête DELETE pour supprimer le produit
-        const res = await fetch(`https://stage-ydwe.onrender.com/api/deleteProducts/${currentEditId}`, {
+        const res = await fetch(`${API_URL}/api/deleteProducts/${currentEditId}`, {
             method: 'DELETE',
             credentials: 'include'
         })
@@ -212,7 +213,7 @@ async function addProduct() {
         const stock = document.getElementById('add-stock').value
 
         // Envoyer une requête POST pour ajouter un nouveau produit
-        const res = await fetch('https://stage-ydwe.onrender.com/api/addProducts', {
+        const res = await fetch(`${API_URL}/api/addProducts`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',

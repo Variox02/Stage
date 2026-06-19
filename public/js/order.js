@@ -2,6 +2,7 @@ import { checkAuth } from './e-navbar.js'
 import { addToCart, updateCartBadge, renderCart, CheckoutBtn } from './e-cart.js'
 import { getUser } from './e-checkcookie.js'
 import { getEmojiForPizza } from './e-utils.js'
+import { API_URL } from './e-config.js'
 
 function loadOrderItems() {
     const cart = JSON.parse(localStorage.getItem('cart')) || []
@@ -86,7 +87,7 @@ document.querySelector('#btn-pay').addEventListener('click', async () => {
     const address = document.getElementById('order-address-display').textContent
 
     try {
-        const res = await fetch('https://stage-ydwe.onrender.com/api/commande', {
+        const res = await fetch(`${API_URL}/api/commande`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -96,7 +97,7 @@ document.querySelector('#btn-pay').addEventListener('click', async () => {
         if (!res.ok) throw new Error()
 
         // Créer la session Stripe
-        const stripeRes = await fetch('https://stage-ydwe.onrender.com/api/create-checkout-session', {
+        const stripeRes = await fetch(`${API_URL}/api/create-checkout-session`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',

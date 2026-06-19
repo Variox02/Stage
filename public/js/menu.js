@@ -2,6 +2,7 @@
 import { checkAuth } from './e-navbar.js'
 import { addToCart, updateCartBadge, renderCart, CheckoutBtn } from './e-cart.js'
 import { getEmojiForPizza } from './e-utils.js'
+import { API_URL } from './e-config.js'
 
 
 // Charge et affiche toutes les pizzas disponibles
@@ -12,7 +13,7 @@ async function loadMenu() {
     const error = document.getElementById('menu-error')
 
     try {
-        const res = await fetch('https://stage-ydwe.onrender.com/api/products')
+        const res = await fetch(`${API_URL}/api/products`)
         const products = await res.json()
 
         spinner.classList.add('d-none')

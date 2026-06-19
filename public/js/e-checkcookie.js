@@ -1,3 +1,4 @@
+import { API_URL } from './e-config.js'
 // Module de vérification d'authentification
 // Vérifie si l'utilisateur est connecté, admin ou livreur via les cookies de session
 
@@ -5,7 +6,7 @@
 // Retourne null si l'utilisateur n'est pas authentifié
 export async function getUser() {
     try {
-        const res = await fetch('/api/me', {
+        const res = await fetch(`${API_URL}/api/me`, {
         credentials: 'include'
         });
 
