@@ -62,7 +62,6 @@ document.querySelectorAll('input[name="order-mode"]').forEach(delivery => {
         const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
         const deliveryCost = delivery.value === 'livraison' ? 2.50 : 0
         const total = subtotal + deliveryCost
-        const address = document.getElementById('order-address-display').textContent
 
         document.getElementById('order-delivery-cost').textContent = deliveryCost.toFixed(2) + ' €'
         document.getElementById('order-total').textContent = total.toFixed(2) + ' €'
@@ -84,6 +83,7 @@ document.querySelector('#btn-pay').addEventListener('click', async () => {
 
     document.getElementById('btn-pay').disabled = true
     document.getElementById('btn-pay-label').textContent = 'Traitement...'
+    const address = document.getElementById('order-address-display').textContent
 
     try {
         const res = await fetch('https://stage-ydwe.onrender.com/api/commande', {
