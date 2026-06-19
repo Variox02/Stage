@@ -18,7 +18,7 @@ router.post('/api/commande', async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         const id_user = decoded.id
 
-        const { items, deliveryCost, delivery } = req.body
+        const { items, deliveryCost, delivery, address  } = req.body
 
         // Calcul du prix total de la commande à partir des articles et des frais de livraison.
         const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
