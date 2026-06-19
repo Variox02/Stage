@@ -1,5 +1,7 @@
+// Identifiant de la livraison actuellement consultée dans la modal
 let currentDeliveryId = null
 
+// Récupère la liste des livraisons côté serveur et met à jour l'UI
 async function commandlist() {
     try {
         const response = await fetch('https://stage-ydwe.onrender.com/api/deliverylist', {
@@ -9,6 +11,7 @@ async function commandlist() {
 
         if (!response.ok) throw new Error('Erreur lors de la récupération des livraisons')
 
+        // Tableau d'objets delivery reçu depuis l'API
         const deliveries = await response.json()
         const grid = document.getElementById('delivery-grid')
         grid.innerHTML = ''
@@ -21,6 +24,7 @@ async function commandlist() {
             document.getElementById('delivery-empty').classList.add('d-none')
         }
 
+        // Génération des cartes de livraison dynamiquement
         deliveries.forEach(d => {
             const isPris = d.id_delivery !== null
             const col = document.createElement('div')
@@ -38,18 +42,20 @@ async function commandlist() {
             grid.appendChild(col)
         })
 
-        // Stats
+        // Mise à jour des statistiques visibles en haut de la page
         const pris = deliveries.filter(d => d.id_delivery !== null).length
         document.getElementById('stat-total').textContent = deliveries.length
         document.getElementById('stat-pris').textContent = pris
 
         // Gestionnaire pour ouvrir la modal de détail
+        // Ouvre la modal de détail quand on clique sur une carte
         document.querySelectorAll('.btn-view-delivery').forEach(btn => {
             btn.addEventListener('click', () => {
                 currentDeliveryId = btn.dataset.id
                 document.getElementById('detail-order-id').textContent = `#${btn.dataset.idCommande}`
 
                 const isPris = btn.dataset.pris === 'true'
+                // Affiche/masque les boutons selon si la commande est déjà prise
                 document.getElementById('btn-take-delivery').classList.toggle('d-none', isPris)
                 document.getElementById('btn-cancel-delivery').classList.toggle('d-none', !isPris)
 
@@ -67,6 +73,7 @@ async function commandlist() {
     }
 }
 
+// Prise en charge d'une livraison : envoie une requête PUT à l'API
 document.getElementById('btn-take-delivery').addEventListener('click', async () => {
     try {
         const res = await fetch(`https://stage-ydwe.onrender.com/api/deliverylist/${currentDeliveryId}/take`, {
@@ -76,6 +83,7 @@ document.getElementById('btn-take-delivery').addEventListener('click', async () 
 
         if (!res.ok) throw new Error()
 
+        // Ferme la modal et recharge la liste pour refléter la prise en charge
         bootstrap.Modal.getInstance(document.getElementById('orderDetailModal')).hide()
         commandlist()
 
@@ -84,4 +92,5 @@ document.getElementById('btn-take-delivery').addEventListener('click', async () 
     }
 })
 
+// Chargement initial de la liste des livraisons au chargement de la page
 commandlist()
