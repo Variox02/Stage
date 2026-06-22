@@ -35,6 +35,8 @@ import adminRouter from './admin.js'
 import orderRouter from './validorder.js'
 import paymentRouter from './payment.js'
 import deliveryRouter from './delivery.js'
+import adminutilisateursRouter from './adminutilisateurs.js'
+import admincommandesRouter from './admincommandes.js'
 
 // Montage du routeur de livraison sur l'application.
 app.use(deliveryRouter)
@@ -46,6 +48,10 @@ app.use(orderRouter)
 app.use(editProfilRouter)
 //Routeur de la partie admin
 app.use(adminRouter)
+//Routeur de la gestion des utilisateurs
+app.use(adminutilisateursRouter)
+//Routeur de la gestion des commandes
+app.use(admincommandesRouter)
 
 // -----------------------------------------------------------
 // Route publique : liste des produits disponibles en stock

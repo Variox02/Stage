@@ -66,11 +66,27 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
 
 /* Bandeau defilant d'information */
 #band { background: var(--rouge); overflow: hidden; }
-.band-track { display:flex; gap:3rem; animation: scroll-band 18s linear infinite; white-space:nowrap;  width: max-content; will-change: transform; }
+
+.band-track {
+    display: flex;
+    gap: 3rem;
+    white-space: nowrap;
+    width: max-content;
+    will-change: transform;
+}
+
+.band-track.band-ready {
+    animation: scroll-band var(--scroll-duration, 18s) linear infinite;
+}
+
 .band-item { font-size:.82rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.9); }
 .band-item::before {content: " . ";color: rgba(255,255,255,.6);}
 .band-item::after {content: " . ";color: rgba(255,255,255,.6);}
-@keyframes scroll-band { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+@keyframes scroll-band {
+    from { transform: translateX(0); }
+    to   { transform: translateX(var(--scroll-distance)); }
+}
 
 
 /* Titres de section generiques */

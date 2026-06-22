@@ -12,26 +12,47 @@ async function loadProducts() {
     const products = await response.json()
 
     const track = document.getElementById('band-track')
+    track.innerHTML = ''
+    track.classList.remove('band-ready')
 
     if (!products.length) {
       track.innerHTML = '<span class="band-item">Aucun produit trouvé</span>'
       return
     }
 
-    // Affiche chaque produit deux fois pour une boucle continue
-    products.forEach(p => {
-      const span = document.createElement('span')
-      span.classList.add('band-item')
-      span.textContent = `${getEmojiForPizza(p.name)} ${p.name}`
-      track.appendChild(span)
-    })
+    // Calcule combien de répétitions sont nécessaires pour dépasser largement l'écran
+    // (sécurité : on vise au moins 3x la largeur visible, plafonné pour ne pas exploser le DOM)
+    const screenWidth = window.innerWidth
+    const estimatedItemWidth = 150 // largeur moyenne approximative d'un item en px
+    const itemsNeededForScreen = Math.ceil(screenWidth / estimatedItemWidth)
+    const repeatsForScreen = Math.ceil(itemsNeededForScreen / products.length) + 1
+    const safeRepeats = Math.min(Math.max(repeatsForScreen, 2), 8) // entre 2 et 8 répétitions max
 
-    products.forEach(p => {
-      const span = document.createElement('span')
-      span.classList.add('band-item')
-      span.textContent = `${getEmojiForPizza(p.name)} ${p.name}`
-      track.appendChild(span)
-    })
+    function appendOneSet() {
+      products.forEach(p => {
+        const span = document.createElement('span')
+        span.classList.add('band-item')
+        span.textContent = `${getEmojiForPizza(p.name)} ${p.name}`
+        track.appendChild(span)
+      })
+    }
+
+    // Premier set, pour mesurer sa largeur réelle (gap inclus avec le set suivant)
+    appendOneSet()
+    const gapValue = parseFloat(getComputedStyle(track).gap) || 0
+    const singleSetWidth = track.scrollWidth + gapValue
+
+    // Ajoute les sets supplémentaires nécessaires pour couvrir large l'écran
+    for (let i = 1; i < safeRepeats; i++) {
+      appendOneSet()
+    }
+
+    const speed = 30 // px par seconde
+    const duration = singleSetWidth / speed
+
+    track.style.setProperty('--scroll-distance', `-${singleSetWidth}px`)
+    track.style.setProperty('--scroll-duration', `${duration}s`)
+    track.classList.add('band-ready')
 
   } catch (err) {
     console.error(err)

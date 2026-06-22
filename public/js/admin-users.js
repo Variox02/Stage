@@ -1,0 +1,137 @@
+import { API_URL } from './e-config.js'
+
+let currentEditUserId = null
+
+// Récupère et affiche la liste des utilisateurs côté administration
+// - Appelle GET /api/users (cookie JWT envoyé via `credentials: 'include'`)
+// - Construit les lignes du tableau, met à jour les statistiques
+// - Prépare les listeners pour ouvrir le modal d'édition
+async function printUsers() {
+    try {
+        const response = await fetch(`${API_URL}/api/users`, { credentials: 'include' })
+        if (!response.ok) throw new Error('Erreur lors de la récupération des utilisateurs')
+
+        const users = await response.json()
+        const tbody = document.getElementById('users-tbody')
+        tbody.innerHTML = ''
+        document.getElementById('users-spinner').classList.add('d-none')
+
+        // Parcours des utilisateurs et insertion dans le DOM
+        users.forEach(u => {
+            const tr = document.createElement('tr')
+
+            let roleLabel = '🙋 Client'
+            if (u.isadmin && u.isdelivery) roleLabel = '🛠️🛵 Admin + Livreur'
+            else if (u.isadmin) roleLabel = '🛠️ Admin'
+            else if (u.isdelivery) roleLabel = '🛵 Livreur'
+
+            tr.innerHTML = `
+                <td><span class="admin-product-name">${u.first_name} ${u.name}</span></td>
+                <td><span class="admin-product-desc">${u.email}</span></td>
+                <td><span class="admin-product-desc">${u.telephone || '—'}</span></td>
+                <td><span class="admin-product-desc">${u.address || '—'}</span></td>
+                <td class="text-center"><span class="admin-stock-badge admin-stock-ok">${roleLabel}</span></td>
+                <td class="text-center">
+                    <button class="admin-btn-edit"
+                        data-id="${u.id}"
+                        data-first-name="${u.first_name}"
+                        data-name="${u.name}"
+                        data-email="${u.email}"
+                        data-phone="${u.telephone || ''}"
+                        data-address="${u.address || ''}"
+                        data-isadmin="${u.isadmin}"
+                        data-isdelivery="${u.isdelivery}">
+                        ✏️ Modifier
+                    </button>
+                </td>
+            `
+            tbody.appendChild(tr)
+        })
+
+        // Mise à jour des statistiques affichées en haut de la page
+        const total = users.length
+        const livreurs = users.filter(u => u.isdelivery).length
+        const admins = users.filter(u => u.isadmin).length
+        const clients = users.filter(u => !u.isadmin && !u.isdelivery).length
+        document.getElementById('stat-total').textContent = total
+        document.getElementById('stat-livreurs').textContent = livreurs
+        document.getElementById('stat-admins').textContent = admins
+        document.getElementById('stat-clients').textContent = clients
+
+        // Listener "Modifier" — recréé à chaque appel car le DOM est régénéré
+        document.querySelectorAll('.admin-btn-edit').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentEditUserId = btn.dataset.id
+                document.getElementById('edit-user-first-name').value = btn.dataset.firstName
+                document.getElementById('edit-user-name').value = btn.dataset.name
+                document.getElementById('edit-user-email').value = btn.dataset.email
+                document.getElementById('edit-user-phone').value = btn.dataset.phone
+                document.getElementById('edit-user-address').value = btn.dataset.address
+                document.getElementById('edit-user-isadmin').checked = btn.dataset.isadmin === 'true'
+                document.getElementById('edit-user-isdelivery').checked = btn.dataset.isdelivery === 'true'
+
+                const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('editUserModal'))
+                modal.show()
+            })
+        })
+
+    } catch (error) {
+        console.error(error)
+        document.getElementById('users-spinner').classList.add('d-none')
+        const err = document.getElementById('users-error')
+        err.textContent = 'Impossible de charger les utilisateurs.'
+        err.classList.remove('d-none')
+    }
+}
+
+// Enregistrement des changements apportés à un utilisateur via le modal
+document.getElementById('btn-save-user').addEventListener('click', async () => {
+    const first_name = document.getElementById('edit-user-first-name').value
+    const name = document.getElementById('edit-user-name').value
+    const email = document.getElementById('edit-user-email').value
+    const telephone = document.getElementById('edit-user-phone').value
+    const address = document.getElementById('edit-user-address').value
+    const isadmin = document.getElementById('edit-user-isadmin').checked
+    const isdelivery = document.getElementById('edit-user-isdelivery').checked
+
+    try {
+        const res = await fetch(`${API_URL}/api/users/${currentEditUserId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ first_name, name, email, telephone, address, isadmin, isdelivery })
+        })
+
+        if (!res.ok) throw new Error()
+
+        bootstrap.Modal.getInstance(document.getElementById('editUserModal')).hide()
+        printUsers()
+
+    } catch {
+        // En cas d'erreur réseau ou serveur
+        alert('Erreur lors de la modification de l\'utilisateur')
+    }
+})
+
+// Suppression définitive d'un utilisateur (confirmation demandée)
+document.getElementById('btn-delete-user').addEventListener('click', async () => {
+    if (!confirm('Supprimer cet utilisateur définitivement ?')) return
+
+    try {
+        const res = await fetch(`${API_URL}/api/users/${currentEditUserId}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        })
+
+        if (!res.ok) throw new Error()
+
+        // Ferme le modal et recharge la liste
+        bootstrap.Modal.getInstance(document.getElementById('editUserModal')).hide()
+        printUsers()
+
+    } catch {
+        alert('Erreur lors de la suppression de l\'utilisateur')
+    }
+})
+
+printUsers()
