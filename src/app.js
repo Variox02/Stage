@@ -37,7 +37,10 @@ import paymentRouter from './payment.js'
 import deliveryRouter from './delivery.js'
 import adminutilisateursRouter from './adminutilisateurs.js'
 import admincommandesRouter from './admincommandes.js'
+import factureRouter from './facture.js'
 
+// Montage du routeur de factures sur l'application.
+app.use(factureRouter)
 // Montage du routeur de livraison sur l'application.
 app.use(deliveryRouter)
 // Montage du routeur de paiement sur l'application.

@@ -13,11 +13,6 @@ import cookieParser from 'cookie-parser'
 
 const router = express.Router()
 
-/**
- * GET /api/orders
- * Liste toutes les commandes avec leur statut
- * Nécessite un token JWT valide d'administrateur
- */
 // GET /api/orders
 // - Retourne la liste des commandes triées par id décroissant
 // - Joint les informations de livraison si présentes (LEFT JOIN)
@@ -125,10 +120,5 @@ router.put('/api/orders/:id/done', async (req, res) => {
 
 
 
-
-
-
-
-// Exporter le routeur pour l'utiliser dans l'application principale
 // Export du routeur pour l'intégration dans l'app principale
 export default router
