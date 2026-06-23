@@ -6,7 +6,7 @@ localStorage.removeItem('cart')
 
 async function loadLastCommande() {
     try {
-        const res = await fetch('${API_URL}/api/lastCommande', {
+        const res = await fetch(`${API_URL}/api/lastCommande`, {
             credentials: 'include'
         })
         if (!res.ok) return

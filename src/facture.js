@@ -46,7 +46,7 @@ router.get('/api/facture/:id', async (req, res) => {
         // Générer le PDF
         const doc = new PDFDocument({ margin: 50 })
 
-        res.setHeader('Content-Type', '../public/pdf')
+        res.setHeader('Content-Type', 'application/pdf')
         res.setHeader('Content-Disposition', `attachment; filename=facture-${id}.pdf`)
         doc.pipe(res)
 
