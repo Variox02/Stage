@@ -35,7 +35,15 @@ async function commandlist() {
                     <h5 class="admin-card-title mb-2">📦 Commande #${d.id_commande}</h5>
                     <p class="admin-product-desc mb-3">${d.delivery_address}</p>
                     <p class="admin-product-desc mb-3">${new Date(d.date_delivery).toLocaleString('fr-FR')}</p>
-                    <button class="btn ${isPris ? 'btn-outline-secondary' : 'btn-rouge'} w-100 btn-view-delivery" data-id="${d.id}" data-id-commande="${d.id_commande}" data-pris="${isPris}">
+                    <button class="btn ${isPris ? 'btn-outline-secondary' : 'btn-rouge'} w-100 btn-view-delivery"
+                        data-id="${d.id}"
+                        data-id-commande="${d.id_commande}"
+                        data-pris="${isPris}"
+                        data-address="${d.delivery_address}"
+                        data-price="${d.price}"
+                        data-client="${d.first_name} ${d.name}"
+                        data-telephone="${d.telephone}"
+                        >
                         ${isPris ? '🛵 Déjà prise en charge' : 'Voir le détail'}
                     </button>
                 </div>
@@ -54,14 +62,15 @@ async function commandlist() {
             btn.addEventListener('click', () => {
                 currentDeliveryId = btn.dataset.id
                 document.getElementById('detail-order-id').textContent = `#${btn.dataset.idCommande}`
+                document.getElementById('detail-address').textContent = btn.dataset.address || '—'
+                document.getElementById('detail-phone').textContent = btn.dataset.telephone || 'Non renseigné'
+                document.getElementById('detail-total').textContent = parseFloat(btn.dataset.price).toFixed(2) + ' €'
 
                 const isPris = btn.dataset.pris === 'true'
-                // Affiche/masque les boutons selon si la commande est déjà prise
                 document.getElementById('btn-take-delivery').classList.toggle('d-none', isPris)
                 document.getElementById('btn-cancel-delivery').classList.toggle('d-none', !isPris)
 
-                const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('orderDetailModal'))
-                modal.show()
+                bootstrap.Modal.getOrCreateInstance(document.getElementById('orderDetailModal')).show()
             })
         })
 
@@ -90,6 +99,23 @@ document.getElementById('btn-take-delivery').addEventListener('click', async () 
 
     } catch {
         alert('Erreur lors de la prise en charge de la commande')
+    }
+})
+
+document.getElementById('btn-cancel-delivery').addEventListener('click', async () => {
+    try {
+        const res = await fetch(`${API_URL}/api/deliverylist/${currentDeliveryId}/cancel`, {
+            method: 'PUT',
+            credentials: 'include'
+        })
+
+        if (!res.ok) throw new Error()
+
+        bootstrap.Modal.getInstance(document.getElementById('orderDetailModal')).hide()
+        commandlist()
+
+    } catch {
+        alert('Erreur lors de l\'annulation de la prise en charge')
     }
 })
 
