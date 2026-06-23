@@ -134,4 +134,61 @@ document.getElementById('btn-delete-user').addEventListener('click', async () =>
     }
 })
 
+// Charge le nombre d'abonnés au chargement de la modal
+document.getElementById('newsletterModal').addEventListener('show.bs.modal', async () => {
+    try {
+        const res = await fetch(`${API_URL}/api/newsletter/count`, {
+            credentials: 'include'
+        })
+        const data = await res.json()
+        document.getElementById('newsletter-count').textContent = `${data.count} destinataire${data.count > 1 ? 's' : ''}`
+    } catch {
+        document.getElementById('newsletter-count').textContent = '— destinataires'
+    }
+})
+
+document.getElementById('btn-send-newsletter').addEventListener('click', async () => {
+    const subject = document.getElementById('newsletter-subject').value.trim()
+    const body = document.getElementById('newsletter-body').value.trim()
+    const errorEl = document.getElementById('newsletter-error')
+    const successEl = document.getElementById('newsletter-success')
+
+    errorEl.classList.add('d-none')
+    successEl.classList.add('d-none')
+
+    if (!subject || !body) {
+        errorEl.textContent = 'Veuillez remplir tous les champs.'
+        errorEl.classList.remove('d-none')
+        return
+    }
+
+    document.getElementById('btn-send-newsletter').disabled = true
+    document.getElementById('btn-send-newsletter').textContent = 'Envoi en cours...'
+
+    try {
+        const res = await fetch(`${API_URL}/api/newsletter/send`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ subject, body })
+        })
+
+        const data = await res.json()
+
+        if (!res.ok) throw new Error(data.error)
+
+        successEl.textContent = `✅ Newsletter envoyée à ${data.sent} abonné${data.sent > 1 ? 's' : ''} !`
+        successEl.classList.remove('d-none')
+        document.getElementById('newsletter-subject').value = ''
+        document.getElementById('newsletter-body').value = ''
+
+    } catch (err) {
+        errorEl.textContent = err.message || 'Erreur lors de l\'envoi.'
+        errorEl.classList.remove('d-none')
+    } finally {
+        document.getElementById('btn-send-newsletter').disabled = false
+        document.getElementById('btn-send-newsletter').textContent = '📧 Envoyer'
+    }
+})
+
 printUsers()
