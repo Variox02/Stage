@@ -166,3 +166,47 @@ footer { background: var(--texte); }
     border-color: var(--beige-dark);
     margin: 0.35rem 0;
 }
+
+/* =============================================
+    NAVBAR MOBILE
+   ============================================= */
+@media (max-width: 991px) {
+
+    #navMenu {
+        background: rgba(251,246,236,.98);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid var(--beige-dark);
+        padding: 1rem 1.5rem;
+    }
+
+    #navMenu .navbar-nav {
+        gap: .25rem !important;
+    }
+
+    #navMenu .nav-link {
+        padding: .65rem .5rem;
+        border-bottom: 1px solid var(--beige-dark);
+    }
+
+    /* Zone auth en colonne */
+    #nav-auth-zone {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        width: 100%;
+        gap: .5rem !important;
+        padding-top: .75rem;
+    }
+
+    #nav-auth-zone .btn,
+    #nav-auth-zone a {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Dropdown profil en static */
+    #navbar .dropdown-menu {
+        position: static !important;
+        box-shadow: none !important;
+        margin-top: .5rem !important;
+    }
+}
