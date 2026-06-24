@@ -88,7 +88,10 @@
                     <button class="btn btn-brun px-4" data-bs-toggle="modal" data-bs-target="#newsletterModal">
                         📧 Newsletter
                     </button>
-                    <input type="text" class="admin-search" placeholder="🔍 Rechercher un utilisateur..." id="search-input" />
+                    <div class="search-wrapper">
+                        <input type="text" class="admin-search" placeholder="🔍 Rechercher un utilisateur..." id="search-input" />
+                        <div id="search-results" class="search-results-dropdown d-none"></div>
+                    </div>
                 </div>
 
                 <div id="users-spinner" class="d-flex justify-content-center py-5">

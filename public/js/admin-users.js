@@ -1,6 +1,7 @@
 import { API_URL } from './e-config.js'
 
 let currentEditUserId = null
+let allUsers = []
 
 // Récupère et affiche la liste des utilisateurs côté administration
 // - Appelle GET /api/users (cookie JWT envoyé via `credentials: 'include'`)
@@ -12,6 +13,7 @@ async function printUsers() {
         if (!response.ok) throw new Error('Erreur lors de la récupération des utilisateurs')
 
         const users = await response.json()
+        allUsers = users
         const tbody = document.getElementById('users-tbody')
         tbody.innerHTML = ''
         document.getElementById('users-spinner').classList.add('d-none')
@@ -190,5 +192,87 @@ document.getElementById('btn-send-newsletter').addEventListener('click', async (
         document.getElementById('btn-send-newsletter').textContent = '📧 Envoyer'
     }
 })
+
+
+// Calcule un score de pertinence simple : priorité à "commence par", puis "contient"
+function matchScore(text, query) {
+    if (text.startsWith(query)) return 2
+    if (text.includes(query)) return 1
+    return 0
+}
+
+// Affiche les 5 utilisateurs les plus proches de la recherche, sous la barre
+function showSearchResults(query) {
+    const dropdown = document.getElementById('search-results')
+    const q = query.trim().toLowerCase()
+
+    if (!q) {
+        dropdown.classList.add('d-none')
+        dropdown.innerHTML = ''
+        return
+    }
+
+    const results = allUsers
+        .map(u => {
+            const fullName = `${u.first_name} ${u.name}`.toLowerCase()
+            const reversedName = `${u.name} ${u.first_name}`.toLowerCase()
+            const score = Math.max(matchScore(fullName, q), matchScore(reversedName, q))
+            return { user: u, score }
+        })
+        .filter(r => r.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 5)
+
+    if (results.length === 0) {
+        dropdown.innerHTML = `<div class="search-result-item" style="color:var(--texte-muted); cursor:default;">Aucun résultat</div>`
+        dropdown.classList.remove('d-none')
+        return
+    }
+
+    dropdown.innerHTML = results.map(r => `
+        <div class="search-result-item" data-id="${r.user.id}">
+            ${r.user.first_name} ${r.user.name}
+            <span style="color:var(--texte-muted); font-size:.8rem;"> — ${r.user.email}</span>
+        </div>
+    `).join('')
+
+    dropdown.classList.remove('d-none')
+
+    // Au clic sur un résultat → ouvre la "fiche" (modal) de cette personne
+    dropdown.querySelectorAll('.search-result-item[data-id]').forEach(item => {
+        item.addEventListener('click', () => {
+            const user = allUsers.find(u => String(u.id) === item.dataset.id)
+            if (!user) return
+
+            currentEditUserId = user.id
+            document.getElementById('edit-user-first-name').value = user.first_name
+            document.getElementById('edit-user-name').value = user.name
+            document.getElementById('edit-user-email').value = user.email
+            document.getElementById('edit-user-phone').value = user.telephone || ''
+            document.getElementById('edit-user-address').value = user.address || ''
+            document.getElementById('edit-user-isadmin').checked = user.isadmin
+            document.getElementById('edit-user-isdelivery').checked = user.isdelivery
+
+            dropdown.classList.add('d-none')
+            document.getElementById('search-input').value = ''
+
+            const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('editUserModal'))
+            modal.show()
+        })
+    })
+}
+
+// Écoute la saisie dans la barre de recherche
+document.getElementById('search-input').addEventListener('input', (e) => {
+    showSearchResults(e.target.value)
+})
+
+// Ferme le dropdown si on clique ailleurs sur la page
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('#search-input') && !e.target.closest('#search-results')) {
+        document.getElementById('search-results').classList.add('d-none')
+    }
+})
+
 
 printUsers()

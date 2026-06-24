@@ -7,6 +7,8 @@ import { API_URL } from './e-config.js'
  * Elle gère également l'édition, la suppression et la mise à jour du stock
  */
 let currentEditId = null
+let allProducts = []
+
 async function printProducts(){
     try {
         // Récupération des produits depuis l'API
@@ -15,6 +17,7 @@ async function printProducts(){
             throw new Error('Erreur lors de la récupération des produits')
         }
         const products = await response.json()
+        allProducts = products  // Stocker tous les produits pour la recherche
         const tbody = document.getElementById('stock-tbody')
         tbody.innerHTML = ''
         // Masquer le spinner de chargement
@@ -227,3 +230,77 @@ async function addProduct() {
         alert('Erreur lors de l\'ajout du produit')
     }
 }
+
+// Calcule un score de pertinence : priorité à "commence par", puis "contient"
+function matchScore(text, query) {
+    if (text.startsWith(query)) return 2
+    if (text.includes(query)) return 1
+    return 0
+}
+
+// Affiche les 5 produits les plus proches du nom tapé, sous la barre
+function showSearchResults(query) {
+    const dropdown = document.getElementById('search-results')
+    const q = query.trim().toLowerCase()
+
+    if (!q) {
+        dropdown.classList.add('d-none')
+        dropdown.innerHTML = ''
+        return
+    }
+
+    const results = allProducts
+        .map(p => ({ product: p, score: matchScore(p.name.toLowerCase(), q) }))
+        .filter(r => r.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 5)
+
+    if (results.length === 0) {
+        dropdown.innerHTML = `<div class="search-result-item" style="color:var(--texte-muted); cursor:default;">Aucun résultat</div>`
+        dropdown.classList.remove('d-none')
+        return
+    }
+
+    dropdown.innerHTML = results.map(r => {
+        const p = r.product
+        return `
+            <div class="search-result-item" data-id="${p.id}">
+                ${p.name}
+                <span style="color:var(--texte-muted); font-size:.8rem;"> — ${parseFloat(p.price).toFixed(2)} €</span>
+            </div>
+        `
+    }).join('')
+
+    dropdown.classList.remove('d-none')
+
+    // Au clic sur un résultat → ouvre la modal "Modifier le produit"
+    dropdown.querySelectorAll('.search-result-item[data-id]').forEach(item => {
+        item.addEventListener('click', () => {
+            const product = allProducts.find(p => String(p.id) === item.dataset.id)
+            if (!product) return
+
+            currentEditId = product.id
+            document.getElementById('edit-name').value = product.name
+            document.getElementById('edit-description').value = product.description || ''
+            document.getElementById('edit-price').value = parseFloat(product.price).toFixed(2)
+
+            dropdown.classList.add('d-none')
+            document.getElementById('search-input').value = ''
+
+            const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('editProductModal'))
+            modal.show()
+        })
+    })
+}
+
+// Écoute la saisie dans la barre de recherche
+document.getElementById('search-input').addEventListener('input', (e) => {
+    showSearchResults(e.target.value)
+})
+
+// Ferme le dropdown si on clique ailleurs sur la page
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('#search-input') && !e.target.closest('#search-results')) {
+        document.getElementById('search-results').classList.add('d-none')
+    }
+})

@@ -2,6 +2,7 @@ import { API_URL } from './e-config.js'
 
 let currentOrderId = null
 let currentFilter = 'all'
+let allOrders = []
 
 // Affiche la grille des commandes pour l'administration
 // - Récupère la liste via GET /api/orders
@@ -12,6 +13,7 @@ async function printOrders() {
         if (!response.ok) throw new Error('Erreur lors de la récupération des commandes')
 
         const orders = await response.json()
+        allOrders = orders
         const grid = document.getElementById('orders-grid')
         grid.innerHTML = ''
         document.getElementById('orders-spinner').classList.add('d-none')
@@ -148,6 +150,75 @@ document.querySelectorAll('.admin-filter-btn').forEach(btn => {
         currentFilter = btn.dataset.filter
         printOrders()
     })
+})
+
+
+// Calcule un score de pertinence : priorité à "commence par", puis "contient"
+function matchScore(text, query) {
+    if (text.startsWith(query)) return 2
+    if (text.includes(query)) return 1
+    return 0
+}
+
+// Affiche les 5 commandes les plus proches du numéro tapé, sous la barre
+function showSearchResults(query) {
+    const dropdown = document.getElementById('search-results')
+    const q = query.trim().toLowerCase().replace('#', '')
+
+    if (!q) {
+        dropdown.classList.add('d-none')
+        dropdown.innerHTML = ''
+        return
+    }
+
+    const results = allOrders
+        .map(o => {
+            const idStr = String(o.id).toLowerCase()
+            return { order: o, score: matchScore(idStr, q) }
+        })
+        .filter(r => r.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 5)
+
+    if (results.length === 0) {
+        dropdown.innerHTML = `<div class="search-result-item" style="color:var(--texte-muted); cursor:default;">Aucun résultat</div>`
+        dropdown.classList.remove('d-none')
+        return
+    }
+
+    dropdown.innerHTML = results.map(r => {
+        const o = r.order
+        const statusLabel = o.isdone ? '✅ Terminée' : '👨‍🍳 En préparation'
+        return `
+            <div class="search-result-item" data-id="${o.id}">
+                Commande #${o.id}
+                <span style="color:var(--texte-muted); font-size:.8rem;"> — ${statusLabel} — ${parseFloat(o.price).toFixed(2)} €</span>
+            </div>
+        `
+    }).join('')
+
+    dropdown.classList.remove('d-none')
+
+    // Au clic sur un résultat → ouvre directement le détail de cette commande
+    dropdown.querySelectorAll('.search-result-item[data-id]').forEach(item => {
+        item.addEventListener('click', () => {
+            dropdown.classList.add('d-none')
+            document.getElementById('search-input').value = ''
+            openOrderDetail(item.dataset.id)
+        })
+    })
+}
+
+// Écoute la saisie dans la barre de recherche
+document.getElementById('search-input').addEventListener('input', (e) => {
+    showSearchResults(e.target.value)
+})
+
+// Ferme le dropdown si on clique ailleurs sur la page
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('#search-input') && !e.target.closest('#search-results')) {
+        document.getElementById('search-results').classList.add('d-none')
+    }
 })
 
 printOrders()
