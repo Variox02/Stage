@@ -1,5 +1,10 @@
 import { getEmojiForPizza } from './e-utils.js'
 import { API_URL } from './e-config.js'
+import { isAdmin } from './e-checkcookie.js'
+
+if (!isAdmin()) {
+    window.location.href = '/admin/login.html'
+}
 
 /**
  * Fonction principale qui affiche la liste des produits avec les options de gestion du stock

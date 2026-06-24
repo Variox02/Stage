@@ -1,8 +1,14 @@
 import { API_URL } from './e-config.js'
+import { isAdmin } from './e-checkcookie.js'
+
+if (!isAdmin()) {
+    window.location.href = '/admin/login.html'
+}
 
 let currentOrderId = null
 let currentFilter = 'all'
 let allOrders = []
+
 
 // Affiche la grille des commandes pour l'administration
 // - Récupère la liste via GET /api/orders

@@ -1,4 +1,9 @@
 import { API_URL } from './e-config.js'
+import { isAdmin } from './e-checkcookie.js'
+
+if (!isAdmin()) {
+    window.location.href = '/admin/login.html'
+}
 
 let currentEditUserId = null
 let allUsers = []
