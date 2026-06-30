@@ -119,13 +119,5 @@ document.getElementById('btn-cancel-delivery').addEventListener('click', async (
     }
 })
 
-async function test(){
-    const res = await fetch(`${API_URL}/api/test-vulnerable/:email`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
-    })
-}
 // Chargement initial de la liste des livraisons au chargement de la page
 commandlist()
-test()
