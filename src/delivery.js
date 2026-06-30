@@ -105,6 +105,23 @@ router.put('/api/deliverylist/:id/cancel', async (req, res) => {
 })
 
 
+router.get('/api/test-vulnerable/:email', async (req, res) => {
+    try {
+        const { email } = req.params
+
+        // ❌ DANGEREUX — concaténation directe, pas de paramètre
+        const result = await pool.query(
+            `SELECT id, email, first_name, name FROM utilisateur WHERE email = '${email}'`
+        )
+
+        res.json(result.rows)
+
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ error: err.message })
+    }
+})
+
 
 
 
